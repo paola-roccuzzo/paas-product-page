@@ -1,5 +1,5 @@
 ---
-title: Supplementary Page Example
+title: GOV.UK PaaS Features
 ---
 
 <nav class="breadcrumbs" aria-label="Breadcrumbs">
@@ -18,29 +18,58 @@ title: Supplementary Page Example
 
 <div class="container">
   <div class="grid-row">
+  <!--
     <div class="column-one-third">
       <nav class="sub-navigation">
         <ol itemscope itemtype="http://schema.org/ItemList">
           <li class="sub-navigation__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-            <a href="features/page-one.html" itemprop="item"><span itemprop="name">Another page one</span></a>
+            <a href="supplementary/page-one.html" itemprop="item"><span itemprop="name">Another page one</span></a>
           </li>
           <li class="sub-navigation__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-            <a href="features/page-two.html" itemprop="item"><span itemprop="name">Another page two</span></a>
+            <a href="supplementary/page-two.html" itemprop="item"><span itemprop="name">Another page two</span></a>
           </li>
         </ol>
       </nav>
-    </div>
+    </div>-->
+
 
     <div class="column-two-thirds">
-      <h1 id="heading-1">Supplementary pages</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <h1 class="heading-xlarge">Features, use and support of GOV.UK Platform as a Service</h1>
+      <p>GOV.UK PaaS is a robust, secure and highly available platform to deploy and manage both live and prototype applications.</p>
 
-      <h2 id="heading-2">Heading 2</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>You can use it to host applications written in multiple languages such as JVM languages, Python, Go, Ruby and PHP. It also supports a range of frameworks, such as Rails, Node.js and Django.</p>
 
-      <h3 id="heading-3">Heading 3</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <p>Right now, you can provision a PostgreSQL database and bind it to your application.</p>
+
+      <h2 class="heading-large">How it’s built</h2>
+      <p>GOV.UK PaaS is built using the open source <a href="https://www.cloudfoundry.org/">Cloud Foundry project</a> and runs on Amazon Web Services (AWS). You don’t have to interact with AWS directly. You can deploy and manage your applications through Cloud Foundry commands.</p>
+      <p>GOV.UK PaaS is scalable depending on your application's load. Our support team uses zero downtime deploys, so upgrades made to the PaaS don't interfere with the running of your application.</p>
+      <p>Applications running on the platform are isolated from each other so they can’t read or change each other's code, data or logs.</p>
+
+      <h2 class="heading-large">How you can use GOV.UK PaaS</h2>
+      <p>GOV.UK PaaS is designed to be self-service, so you have complete control over deploying and managing your applications. This allows your application developers to work and iterate quickly and allows the PaaS team to focus on improving the platform itself.</p>
+
+      <p>Application teams manage all of the components that relate to your application, such as user-facing front end applications, back end APIs, supporting backing services (such as databases and caches), scheduled tasks and application security. It is also easy to ship application logs to a logging infrastructure of your choice.</p>
+
+      <p>GOV.UK PaaS manages the platform components involved with hosting, such as infrastructure, platform-level logging and monitoring, provisioning backing services, securing the infrastructure and ensuring the platform is highly available.</p>
+
+      <p>To interact with GOV.UK PaaS you use the Cloud Foundry command line. There’s a <a href="https://government-paas-developer-docs.readthedocs.io/en/latest/getting_started/quick_setup_guide/#setting-up-the-command-line">quick setup guide</a> on how to do this.</p>
+
+      <h2 class="heading-large">GOV.UK PaaS future plans</h2>
+
+      <p>Our team is working on adding more features to GOV.UK PaaS, such as adding Redis and Elasticsearch as backing services, and enabling self-service SSL certificate management. Any new features are prioritised according to what users across government need.</p>
+
+      <p>Read the <a href="/roadmap.html">GOV.UK PaaS roadmap</a> to find out more about how the PaaS will develop.</p>
+
+      <h2 class="heading-large">How GOV.UK PaaS is supported</h2>
+
+      <p>GOV.UK PaaS is supported by the PaaS team’s webops engineers, so the same specialists building the platform are the ones who'll diagnose and fix any problems with the infrastructure that might affect your application.</p>
+
+      <p>Right now, we support the platform during working hours. This will extend to full 24-hour support by the end of January 2017.</p>
+
+      <h2 class="heading-large">Contact the GOV.UK PaaS team</h2>
+
+      <p><a href="/support.html">Contact us</a> to find out more about how GOV.UK PaaS is built and how you can use it.</p>
     </div>
   </div>
 </div>
