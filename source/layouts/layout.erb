@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 
-    <title><%= current_page.data.title && "#{current_page.data.title} – " %>GOV.UK Product Pages</title>
+    <title><%= current_page.data.title && "#{current_page.data.title} – " %>GOV.UK Platform as a Service</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -24,12 +24,12 @@
       <div class="header__container">
         <div class="header__brand">
           <a href="/">
-            <span class="govuk-logo">
-              <img class="govuk-logo__printable-crown" src="/images/gov.uk_logotype_crown_invert_trans.png" height="32" width="36">
-              GOV.UK
-            </span>
+            <!-- don't show logo <span class="govuk-logo">
+              <img class="govuk-logo__printable-crown" src="/images/gov.uk_logotype_crown_invert_trans.png" height="32" width="36"> 
+              
+            </span> -->
             <span class="header__title">
-              Product Pages
+             GOV.UK Platform as a Service
               <span class="phase-banner">Beta</span>
             </span>
           </a>
@@ -45,7 +45,8 @@
             <%
               {
                 'About' => '/',
-                'Supplementary Pages' => '/supplementary.html',
+                'Features' => '/features.html',
+                'Documentation' => 'https://government-paas-developer-docs.readthedocs.io/en/latest/',
                 'Support' => '/support.html'
               }.each do |title, url|
             %>
