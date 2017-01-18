@@ -20,5 +20,5 @@ echo "OK!"
 
 bundle exec middleman build
 cp Staticfile.auth build
-cf target -o govuk-service-manual -s product-pages
+cf target -o govuk-paas -s paas-product-page
 cf push
