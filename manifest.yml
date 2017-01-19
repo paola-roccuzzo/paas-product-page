@@ -1,6 +1,7 @@
 ---
 applications:
-- name: paas-product-page
+- name: govuk-paas
   memory: 64M
   path: ./build
   buildpack: staticfile_buildpack
+  instances: 2
