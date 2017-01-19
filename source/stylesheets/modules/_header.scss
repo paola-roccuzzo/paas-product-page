@@ -155,7 +155,8 @@ $active-nav-color: #1d8feb;
     display: inherit;
     float: none;
     clear: none;
-    padding-left: 5px;
+    /* padding-left: 5px; */
+    /* don't need padding if crown logo removed */
   }
 
   .phase-banner {
