@@ -18,6 +18,8 @@ error() {
 # fi
 # echo "OK!"
 
+bundle install
+bower install
 bundle exec middleman build
 #cp Staticfile.auth build
 cf target -o govuk-paas -s docs
