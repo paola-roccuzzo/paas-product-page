@@ -21,6 +21,7 @@ error() {
 bundle install
 bower install
 bundle exec middleman build
+cp nginx.conf ./build/
 #cp Staticfile.auth build
 cf target -o govuk-paas -s docs
 cf push
