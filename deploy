@@ -23,5 +23,5 @@ bower install
 bundle exec middleman build
 cp nginx.conf ./build/
 #cp Staticfile.auth build
-cf target -o govuk-paas -s docs
-cf push
+cf target -o "${PRODUCT_ORG_NAME:-govuk-paas}" -s "${PRODUCT_SPACE_NAME:-docs}"
+cf push "${PRODUCT_APP_NAME:-govuk-paas}"

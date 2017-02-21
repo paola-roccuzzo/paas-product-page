@@ -15,7 +15,10 @@ It is based on: https://github.com/alphagov/product-page-example
 
 Check in your changes to master.
 
-Run ./deploy - you will need the correct PaaS permissions.
+ * Deploy to prod: Run `./deploy`
+ * Deploy for testing: `PRODUCT_ORG_NAME=paas-demo PRODUCT_SPACE_NAME=sandbox PRODUCT_APP_NAME=test-govuk-paas ./deploy`
+
+Note: you will need the correct PaaS permissions.
 
 ## Redirection rules
 
