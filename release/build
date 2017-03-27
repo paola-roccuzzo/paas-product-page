@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -eu
+
+echo "Install bower dependencies..."
+bower install --allow-root
+
+echo "Run middleman..."
+bundle exec middleman build
+
+echo "Copy additional files..."
+cp nginx.conf build
