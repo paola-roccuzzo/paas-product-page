@@ -46,8 +46,9 @@ To make use of it, follow these steps:
 
 ## Deploying changes
 
-This application should not be deployed manually. We've got automated
-procedures in place.
+This application should not be manually deployed to production. A pipeline
+in [alphagov/paas-release-ci][https://github.com/alphagov/paas-release-ci]
+will automatically deploy changes to the `master` branch.
 
 You may wish to manually deploy this application to a different
 environment in order to test some changes. We've provided a release
