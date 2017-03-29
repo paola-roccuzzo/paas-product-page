@@ -11,14 +11,56 @@ It is based on: https://github.com/alphagov/product-page-example
 - `bundle exec middleman server`
 - `open http://localhost:4567`
 
+## Using Docker
+
+This application supports docker for release scripts.
+
+To make use of it, follow these steps:
+
+1. Build the docker image
+
+    ```
+    $ docker build -t paas-product-page .
+    ```
+
+    You may also want to install the existing image instead:
+
+    ```
+    $ docker pull governmentpaas/paas-product-page
+    ```
+
+1. Run the image
+
+    With this command, you'll share the current directory with the docker
+    container and connect into it.
+
+    ```
+    $ docker run -ti --rm -v $(pwd):/app -w app paas-product-page ash
+    ```
+
+1. Run a desired action
+
+    ```
+    $ ./release/build
+    ```
+
 ## Deploying changes
+
+This application should not be deployed manually. We've got automated
+procedures in place.
+
+You may wish to manually deploy this application to a different
+environment in order to test some changes. We've provided a release
+script for both `build` and `push` for your convinience.
 
 Check in your changes to master.
 
- * Deploy to prod: Run `./deploy`
- * Deploy for testing: `PRODUCT_ORG_NAME=paas-demo PRODUCT_SPACE_NAME=sandbox PRODUCT_APP_NAME=test-govuk-paas ./deploy`
+```
+$ ./release/push
+```
 
-Note: you will need the correct PaaS permissions.
+Note: you will need the correct PaaS permissions as well as target your 
+desired organisation and space.
 
 ## Redirection rules
 

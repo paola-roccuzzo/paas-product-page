@@ -1,6 +1,6 @@
 ---
 applications:
-- name: govuk-paas
+- name: paas-product-page
   memory: 64M
   path: ./build
   buildpack: staticfile_buildpack
@@ -9,3 +9,4 @@ applications:
     REDIRECT_RULES: "paas-roadmap.cloudapps.digital:www.cloud.service.gov.uk/roadmap.html"
   hosts:
   - paas-roadmap
+  - paas-product-page
