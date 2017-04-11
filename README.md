@@ -35,7 +35,7 @@ To make use of it, follow these steps:
     container and connect into it.
 
     ```
-    $ docker run -ti --rm -v $(pwd):/app -w app paas-product-page ash
+    $ docker run -ti --rm -v $(pwd):/app -w /app -p 127.0.0.1:4567:4567 paas-product-page ash
     ```
 
 1. Run a desired action
@@ -43,6 +43,14 @@ To make use of it, follow these steps:
     ```
     $ ./release/build
     ```
+
+1. Run a live-reloading server
+
+    ```
+    $ bundle exec middleman server
+    ```
+
+    You can then view the site on the host machine at http://localhost:4567/
 
 ## Deploying changes
 
