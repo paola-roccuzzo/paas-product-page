@@ -37,6 +37,9 @@ title: Support
         applications on GOV.UK PaaS on our <a href="https://status.cloud.service.gov.uk/">system status page</a>. Information on <a href="#raise-critical-incident">raising critical incidents</a> is below.
       </p>
 
+      <p>
+        Tenants are supported differently depending on whether they are in production, and if the request occurs during core hours. For example, only tenants on paid plans who are in production can raise out-of-hours incidents.</p>
+      </p>
 
       <h2 class="heading-large">Support during working hours</h2>
 
@@ -91,6 +94,83 @@ title: Support
         let you know. We’ll address anything that is not a critical incident
         the next working day.
       </p>
+
+      <h2 class="heading-large">SLAs for production tenants</h2>
+
+      <table>
+        <tbody>
+          <tr>
+          <th>Classification</th>
+          <th>Example</th>
+          <th>In hours</th>
+          <th>Out of hours</th>
+        </tr>
+        <tr>
+          <th scope="row">P1<br/>Critical<br/>Incident</th>
+          <td>
+             <ul class="list list-bullet">
+               <li  class="font-xsmall">Apps no longer being served due to an issue with our platform</li>
+               <li class="font-xsmall">Serious security breach on the platform</li>
+               <li class="font-xsmall">You are unable to push an emergency fix to an app due to the PaaS API not being available</li>
+               <li class="font-xsmall">Your live production app has a P1 issue which cannot be resolved without us</li>
+             </ul>
+          </td>
+          <td>
+            <p class="font-xsmall">Start work &amp; respond: 20 minutes</p>
+            <p class="font-xsmall">Update time: 1hr</p>
+          </td>
+          <td>
+            <p class="font-xsmall">Start work &amp; respond: 40 minutes</p>
+            <p class="font-xsmall">Update time: 1hr</p>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">P2<br/>Major<br/>Incident</th>
+          <td>
+            <ul>
+              <li class="font-xsmall">Can&apos;t update/push apps due to platform issue</li>
+              <li class="font-xsmall">Upstream vulnerabilities</li>
+              <li class="font-xsmall">Elevated error rates</li>
+              <li class="font-xsmall">Complete component failure</li>
+              <li class="font-xsmall">Substantial degradation of service</li>
+            </ul>
+          </td>
+          <td>
+            <p class="font-xsmall">Start work &amp; respond: 30 minutes</p>
+            <p class="font-xsmall">Update time: 2hr</p>
+          </td>
+          <td>
+            <p class="font-xsmall"></p>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">P3<br/>Significant<br/>issue</th>
+          <td>
+            <ul><li class="font-xsmall">Users (tenants or end users) experiencing intermittent or degraded service due to platform issue.</li></ul>
+          </td>
+          <td>
+            <p class="font-xsmall">Start work &amp; respond: 2 hours</p>
+            <p class="font-xsmall">Update time: 4 hours</p>
+          </td>
+          <td>
+            <p class="font-xsmall"></p>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">P4<br/>Minor<br/>issue</th>
+          <td>
+            <ul><li class="font-xsmall">Component failure that is not immediately impacting on service</li></ul>
+          </td>
+          <td>
+            <p class="font-xsmall">Start work &amp; respond: 1 business day</p>
+            <p class="font-xsmall">Update time: 2 business days</p>
+          </td>
+          <td>
+            <p class="font-xsmall"></p>
+          </td>
+        </tr>
+      </tbody>
+      </table>
 
       <a name="raise-critical-incident"></a><h2 class="heading-large">Contacting us about a critical issue</h2>
 
