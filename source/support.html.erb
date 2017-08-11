@@ -28,17 +28,19 @@ title: Support
 
       <p>
         On this page you can find out about the support we provide during and
-        outside of working hours, and how you can contact us to report a problem
+        outside of working hours, our <a href="SLAs">production SLAs</a>, and how you can contact us to report a problem
         or ask for help.
       </p>
 
       <p>
-        You can view the availability and database connectivity of live
-        applications on GOV.UK PaaS on our <a href="https://status.cloud.service.gov.uk/">system status page</a>. Information on <a href="#raise-critical-incident">raising critical incidents</a> is below.
+        Information on <a href="#raise-critical-incident">raising critical incidents</a> is below. You can also use our <a href="https://status.cloud.service.gov.uk/">system status page</a> to view the availability and database connectivity of live applications on GOV.UK PaaS.
       </p>
 
       <p>
-        Tenants are supported differently depending on whether they are in production, and if the request occurs during core hours. For example, only tenants on paid plans who are in production can raise out-of-hours incidents.</p>
+        Service teams are supported differently depending on whether they are in production, and if the request occurs during core hours. For example, only service teams on paid plans who are running services in production can raise out-of-hours incidents.
+      </p>
+      <p>
+        We often refer to our users - service teams - as "tenants" to avoid confusion with end users.
       </p>
 
       <h2 class="heading-large">Support during working hours</h2>
@@ -46,11 +48,11 @@ title: Support
       <p>
         Our office hours are 9am - 5pm Monday to Friday. During this time we support:
 
-
       <ul>
         <li>requests for help using GOV.UK PaaS</li>
         <li>fixing issues and resolving incidents</li>
       </ul>
+      </p>
 
       <p>
         We prioritise support for live services over those in development, and
@@ -95,7 +97,7 @@ title: Support
         the next working day.
       </p>
 
-      <h2 class="heading-large">SLAs for production tenants</h2>
+      <a name="SLAs"></a><h2 class="heading-large">SLAs for production tenants</h2>
 
       <table>
         <tbody>
@@ -109,10 +111,10 @@ title: Support
           <th scope="row">P1<br/>Critical<br/>Incident</th>
           <td>
              <ul class="list list-bullet">
-               <li  class="font-xsmall">Apps no longer being served due to an issue with our platform</li>
+               <li  class="font-xsmall">Applications are unavailable to end users due to a problem with our platform</li>
                <li class="font-xsmall">Serious security breach on the platform</li>
-               <li class="font-xsmall">You are unable to push an emergency fix to an app due to the PaaS API not being available</li>
-               <li class="font-xsmall">Your live production app has a P1 issue which cannot be resolved without us</li>
+               <li class="font-xsmall">You can't make a critical fix to your production app due to the PaaS API not being available</li>
+               <li class="font-xsmall">Your live production app has a P1 issue which cannot be resolved without help from us</li>
              </ul>
           </td>
           <td>
@@ -129,10 +131,10 @@ title: Support
           <td>
             <ul>
               <li class="font-xsmall">Can&apos;t update/push apps due to platform issue</li>
-              <li class="font-xsmall">Upstream vulnerabilities</li>
-              <li class="font-xsmall">Elevated error rates</li>
-              <li class="font-xsmall">Complete component failure</li>
-              <li class="font-xsmall">Substantial degradation of service</li>
+              <li class="font-xsmall">Upstream vulnerabilities in GOV.UK PaaS components</li>
+              <li class="font-xsmall">Elevated error rates on the GOV.UK PaaS platform</li>
+              <li class="font-xsmall">Complete failure of a GOV.UK PaaS component</li>
+              <li class="font-xsmall">Substantial degradation of the GOV.UK PaaS service</li>
             </ul>
           </td>
           <td>
