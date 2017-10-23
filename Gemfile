@@ -1,4 +1,4 @@
-ruby '2.4.1'
+ruby File.read(".ruby-version").chomp
 source 'https://rubygems.org'
 gem "sinatra", "~> 2.0"
 gem "sinatra-contrib", "~> 2.0"
