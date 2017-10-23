@@ -1,0 +1,45 @@
+<div class="form-group <%= 'form-group-error' if error %> form-group--invites">
+	<fieldset>
+		<legend>
+			<span class="form-label-bold">Would you like to invite additional users now?</span>
+			<span class="form-hint">We recormend each ‘organisation’ has at least two ‘Org Managers’</span>
+			<span class="error-message"><%= error %></span>
+		</legend>
+		<div class="multiple-choice">
+			<input id="invite-radio-yes" class="invite-radio" type="radio" name="invite_users" value="true" <%= 'checked="checked"' if @form.invite_users === true or @form.invite_users.nil? %>>
+			<label for="invite-radio-yes">Yes, I'd like to invite users to my organisation</label>
+		</div>
+		<div class="panel panel-border-narrow" id="invite-table">
+			<table>
+				<thead>
+					<tr>
+						<th class="numeric" scope="col" colspan="2">
+							<span style="float:left;">Email address</span>
+							<span style="float:right;">Org&nbsp;Manager?</span>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @form.invites.each_with_index do |invite, i| %>
+						<tr class="invite--row">
+							<td class="numeric">
+								<input style="width:100%;" class="form-control" type="text" placeholder="user@email.com" name="invites[<%= i %>]person_email" value="<%= invite.person_email || '' %>">
+							</td>
+							<td class="numeric" style="width:50px">
+								<div class="multiple-choice">
+									<input id="manager-checkbox-<%= i %>" name="invites[<%= i %>]person_is_manager" type="checkbox" value="true" <%= 'checked="checked"' if invite.person_is_manager %>>
+									<label for="manager-checkbox-<%= i %>">&nbsp;</label>
+								</div>
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+			<a id="add-more-invites" href="#add-more-invites" style="display:none;">Add another invite</a>
+		</div>
+		<div class="multiple-choice">
+			<input id="invite-radio-no" class="invite-radio" type="radio" name="invite_users" value="false" <%= 'checked="checked"' if @form.invite_users === false %>>
+			<label for="invite-radio-no">No, I'll do this later</label>
+		</div>
+	</fieldset>
+</div>

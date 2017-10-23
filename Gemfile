@@ -1,14 +1,18 @@
-# If you do not have OpenSSL installed, change
-# the following line to use 'http://'
+ruby '2.4.1'
 source 'https://rubygems.org'
-
-# For faster file watcher updates on Windows:
-gem 'wdm', '~> 0.1.0', platforms: [:mswin, :mingw]
-
-# Windows does not come with time zone data
-gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
-
-# Middleman Gems
-gem 'middleman', '>= 4.0.0'
-gem 'middleman-livereload'
-gem "middleman-sprockets"
+gem "sinatra", "~> 2.0"
+gem "sinatra-contrib", "~> 2.0"
+gem "json", "~> 2.1"
+gem "rspec", "~> 3.6"
+gem "puma", "~> 3.10"
+gem "rest-client", "~> 2.0"
+gem "webmock", "~> 3.0"
+gem "rack", "~> 2.0"
+gem "rack-test", "~> 0.7.0"
+gem "yamllint", "~> 0.0.9"
+gem "staccato", "~> 0.5.1"
+gem "sprockets", "~> 3.7"
+gem "sprockets-helpers", "~> 1.2"
+gem "sass", "~> 3.5"
+gem "capybara", "~> 2.15"
+gem "rake", "~> 12.1"

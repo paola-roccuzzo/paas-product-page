@@ -1,0 +1,16 @@
+<% content_for :head do %>
+	<title>Error - <%= settings.title %></title>
+<% end %>
+
+<% content_for :breadcrumb do %>
+	<%= erb :'partials/_breadcrumb', :locals => {name: 'Error', href: '#', active: true} %>
+<% end %>
+
+<div class="container">
+	<div class="grid-row">
+		<div class="column-two-thirds">
+			<h1 class="heading-large">We were unable to process the page as expected.</h1>
+			<p><%= @error %></p>
+		</div>
+	</div>
+</div>
