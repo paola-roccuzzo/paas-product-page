@@ -3,8 +3,8 @@
 <% end %>
 
 <% content_for :breadcrumb do %>
-	<%= erb :'partials/_breadcrumb', :locals => {name: 'Get started', href: '/get-started'} %>
-	<%= erb :'partials/_breadcrumb', :locals => {name: 'Signup', href: '/signup', active: true} %>
+	<%== erb :'partials/_breadcrumb', :locals => {name: 'Get started', href: '/get-started'} %>
+	<%== erb :'partials/_breadcrumb', :locals => {name: 'Signup', href: '/signup', active: true} %>
 <% end %>
 
 <div class="container">
@@ -65,8 +65,8 @@
 
 				<div class="step step--about-you step--all">
 					<h2 class="heading-medium">Your details</h2>
-					<%= input_for(@form, :person_name, label: 'Name') %>
-					<%= input_for(@form, :person_email, label: 'Email address', hint: 'We can only accept requests from government organisation addresses') %>
+					<%== input_for(@form, :person_name, label: 'Name') %>
+					<%== input_for(@form, :person_email, label: 'Email address', hint: 'We can only accept requests from government organisation addresses') %>
 					<div class="form-group">
 						<input type="hidden" name="step" value="step--create-organisation">
 						<button class="button step-button" style="display:none;">Continue</button>
@@ -75,9 +75,9 @@
 
 				<div class="step step--create-organisation step--all">
 					<h2 class="heading-medium">Your organisation</h2>
-					<%= input_for(@form, :department_name, label: 'Name of your government department or agency') %>
-					<%= input_for(@form, :service_name, label: 'Name of the service or team you work on') %>
-					<%= radio_for(@form, :person_is_manager, label: 'Will you be a manager of this organisation?', hint: 'Organisations are controlled by ‘org managers’ who are responsible for administering the account and assigning roles and permissions to users within the organisation', options: [
+					<%== input_for(@form, :department_name, label: 'Name of your government department or agency') %>
+					<%== input_for(@form, :service_name, label: 'Name of the service or team you work on') %>
+					<%== radio_for(@form, :person_is_manager, label: 'Will you be a manager of this organisation?', hint: 'Organisations are controlled by ‘org managers’ who are responsible for administering the account and assigning roles and permissions to users within the organisation', options: [
 						{label: 'Yes, I will be an org manager for this organisation', value: true},
 						{label: 'No, I will nominate someone else to be an org manager', value: false, note: 'You will need to specify at least one ‘org manager’ in order for us to set up your organisation. If you do not intend to manage the organisation yourself you can invite your nominated manager in the following section.'},
 					]) %>
@@ -90,7 +90,7 @@
 				<div class="step step--invite-users step--all">
 					<h2 class="heading-medium">Invite users to your organisation</h2>
 					<p>Users who aren’t Org Managers can deploy code but won’t be able to administer the account.</p>
-					<%= erb :'partials/_invites', :locals => {error: errors_for(@form, :invites)} %>
+					<%== erb :'partials/_invites', :locals => {error: errors_for(@form, :invites)} %>
 					<div class="form-group">
 						<button id="signup-submit" type="submit" class="button">Submit request</button>
 					</div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%= yield_content :head %>
+	<%== yield_content :head %>
 
 	<meta charset="utf-8">
 
@@ -87,13 +87,13 @@
 						<span itemprop="name">GOV.UK PaaS</span>
 					</a>
 				</li>
-				<%= yield_content :breadcrumb %>
+				<%== yield_content :breadcrumb %>
 			</ol>
 		</nav>
 	<% end %>
 
 	<main role="main" id="main">
-		<%= yield %>
+		<%== yield %>
 	</main>
 
 	<footer class="group js-footer" id="footer" role="contentinfo">

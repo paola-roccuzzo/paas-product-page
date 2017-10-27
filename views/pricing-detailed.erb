@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :breadcrumb do %>
-	<%= erb :'partials/_breadcrumb', :locals => {name: 'Features, roadmap and pricing', href: request.path_info, active: true} %>
+	<%== erb :'partials/_breadcrumb', :locals => {name: 'Features, roadmap and pricing', href: request.path_info, active: true} %>
 <% end %>
 
 <div class="container">
@@ -22,7 +22,8 @@
 				Scale up to a full account with no long term contract
 			</h2>
 			<p>
-				During the trial period, you can move up to a full paid account any time, and get to use all of the functionality of the PaaS.</p> 
+				During the trial period, you can move up to a full paid account any time, and get to use all of the functionality of the PaaS.
+			</p>
 			<p>You don’t have to commit to a long term contract, and you can enable and disable apps, databases and services as required.</p>
 			<p>We will charge you based on your usage, and in particular:</p>
 

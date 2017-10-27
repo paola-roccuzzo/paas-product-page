@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :breadcrumb do %>
-	<%= erb :'partials/_breadcrumb', :locals => {name: 'Support', href: '/support', active: true} %>
+	<%== erb :'partials/_breadcrumb', :locals => {name: 'Support', href: '/support', active: true} %>
 <% end %>
 
 <div class="container">
@@ -124,7 +124,7 @@
 		<h2 class="heading-large">Escalate support requests</h2>
 		<p> If we are not handling your request for support in the way you would expect, please contact a member of the product team, who will reply during working hours: </p>
 		<p> Tom Dolan, senior product manager - <a href="mailto:tom.dolan@digital.cabinet-office-gov.uk"> tom.dolan@digital.cabinet-office-gov.uk </a> <br /> Jess O'Leary, product manager - <a href="mailto:jessica.oleary@digital.cabinet-office.gov.uk"> jessica.oleary@digital.cabinet-office.gov.uk </a> </p>
-		<p> Outside of working hours, please use the escalation contact details you have been sent.</p> 
+		<p> Outside of working hours, please use the escalation contact details you have been sent.</p>
 		<h2 class="heading-large">Updates and announcements</h2>
 		<p> Our <a href="https://status.cloud.service.gov.uk/">system status page</a> shows if live applications and databases are available. You can use this page to sign up to get alerts and incident updates.  </p>
 		<p> <a href="https://groups.google.com/a/digital.cabinet-office.gov.uk/forum/?hl=en#!forum/gov-uk-paas-announce">Join our announcements mailing list</a> to find out about new features and changes to the platform. If you have trouble signing up, please contact <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> and we will add you manually.  </p>

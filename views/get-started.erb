@@ -4,7 +4,7 @@
 <% end %>
 
 <% content_for :breadcrumb do %>
-	<%= erb :'partials/_breadcrumb', :locals => {name: 'Get started', href: request.path_info, active: true} %>
+	<%== erb :'partials/_breadcrumb', :locals => {name: 'Get started', href: request.path_info, active: true} %>
 <% end %>
 
 <div class="container">

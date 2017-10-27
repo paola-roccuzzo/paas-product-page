@@ -1,4 +1,4 @@
-<div class="form-group <%= 'form-group-error' if error %> form-group--invites">
+<div class="form-group <%== error ? 'form-group-error' : '' %> form-group--invites">
 	<fieldset>
 		<legend>
 			<span class="form-label-bold">Would you like to invite additional users now?</span>
@@ -6,7 +6,7 @@
 			<span class="error-message"><%= error %></span>
 		</legend>
 		<div class="multiple-choice">
-			<input id="invite-radio-yes" class="invite-radio" type="radio" name="invite_users" value="true" <%= 'checked="checked"' if @form.invite_users === true or @form.invite_users.nil? %>>
+			<input id="invite-radio-yes" class="invite-radio" type="radio" name="invite_users" value="true" <%== @form.invite_users === true || @form.invite_users.nil? ? 'checked="checked"' : '' %>>
 			<label for="invite-radio-yes">Yes, I'd like to invite users to my organisation</label>
 		</div>
 		<div class="panel panel-border-narrow" id="invite-table">
@@ -27,7 +27,7 @@
 							</td>
 							<td class="numeric" style="width:50px">
 								<div class="multiple-choice">
-									<input id="manager-checkbox-<%= i %>" name="invites[<%= i %>]person_is_manager" type="checkbox" value="true" <%= 'checked="checked"' if invite.person_is_manager %>>
+									<input id="manager-checkbox-<%= i %>" name="invites[<%= i %>]person_is_manager" type="checkbox" value="true" <%= invite.person_is_manager ? 'checked="checked"' : '' %>>
 									<label for="manager-checkbox-<%= i %>">&nbsp;</label>
 								</div>
 							</td>
@@ -38,7 +38,7 @@
 			<a id="add-more-invites" href="#add-more-invites" style="display:none;">Add another invite</a>
 		</div>
 		<div class="multiple-choice">
-			<input id="invite-radio-no" class="invite-radio" type="radio" name="invite_users" value="false" <%= 'checked="checked"' if @form.invite_users === false %>>
+			<input id="invite-radio-no" class="invite-radio" type="radio" name="invite_users" value="false" <%== @form.invite_users === false ? 'checked="checked"' : '' %>>
 			<label for="invite-radio-no">No, I'll do this later</label>
 		</div>
 	</fieldset>
