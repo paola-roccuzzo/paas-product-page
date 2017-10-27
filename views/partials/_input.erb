@@ -1,8 +1,8 @@
-<div class="form-group form-group--<%= name %> <%= 'form-group-error' if error %>">
+<div class="form-group form-group--<%= name %> <%== error ? 'form-group-error' : ''  %>">
 	<label for="<%= name %>">
 		<span class="form-label"><%= label %></span>
 		<span class="form-hint"><%= hint %></span>
 		<span class="error-message"><%= error %></span>
 	</label>
-	<input class="form-control <%= 'form-control-error' if error %>" type="text" name="<%= name %>" value="<%= value %>" style="width:100%;">
+	<input class="form-control <%= error ? 'form-control-error' : '' %>" type="text" name="<%= name %>" value="<%= value %>" style="width:100%;">
 </div>

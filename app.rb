@@ -6,12 +6,14 @@ require 'sprockets-helpers'
 
 require './models/deskpro'
 require './models/forms'
+require 'erubis'
 
 # App is the main Sinatra application
 class App < Sinatra::Base
 
 	set :sprockets, Sprockets::Environment.new
 	set :title, 'GOV.UK Platform as a Service'
+	set :erb, :escape_html => true
 
 	configure do
 		sprockets.append_path File.join(root, 'assets', 'stylesheets', 'govuk_frontend_toolkit')

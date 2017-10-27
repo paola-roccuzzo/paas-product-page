@@ -1,4 +1,4 @@
-<div class="form-group form-group--<% name %> <%= 'form-group-error' if error %>">
+<div class="form-group form-group--<% name %> <%= error ? 'form-group-error' : '' %>">
 	<fieldset>
 		<legend>
 			<span class="form-label-bold"><%= label %></span>
@@ -7,7 +7,7 @@
 		</legend>
 		<% options.each_with_index do |opt, idx| %>
 			<div class="multiple-choice">
-				<input id="<%= name %>-<%= idx %>" class="toggle-radio-note" type="radio" name="<%= name %>" value="<%= opt[:value] || idx.to_s %>" <%= 'checked="checked"' if value == opt[:value] %>>
+				<input id="<%= name %>-<%= idx %>" class="toggle-radio-note" type="radio" name="<%= name %>" value="<%== opt[:value] || idx.to_s %>" <%= value == opt[:value] ? 'checked="checked"' : '' %>>
 				<label for="<%= name %>-<%= idx %>"><%= opt[:label] || "Option #{idx}" %></label>
 			</div>
 			<% if opt[:note] %>
