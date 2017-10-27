@@ -1,8 +1,12 @@
 ---
 applications:
-  - name: paas-product-page
-    buildpack: https://github.com/cloudfoundry/ruby-buildpack.git
-    memory: 128M
-    instances: 2
-    env:
-      APP_ENV: production
+- name: paas-product-page
+  memory: 64M
+  path: ./build
+  buildpack: staticfile_buildpack
+  instances: 2
+  env:
+    REDIRECT_RULES: "paas-roadmap.cloudapps.digital:www.cloud.service.gov.uk/roadmap.html"
+  hosts:
+  - paas-roadmap
+  - paas-product-page

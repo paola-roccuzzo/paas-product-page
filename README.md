@@ -2,36 +2,55 @@
 
 This is the source for the PaaS product page at https://www.cloud.service.gov.uk/
 
-It is a Ruby/Sinatra app that makes use of the GOV.UK Elements, Frontend Toolkit and Template libraries.
+It is based on: https://github.com/alphagov/product-page-example
 
-## Configuration
+## Running locally
 
-The following environment variables should be set for correct deployment:
+- `bundle install`
+- `bower install`
+- `bundle exec middleman server`
+- `open http://localhost:4567`
 
-| variable | required | description |
-|---|---|---|
-| `DESKPRO_API_KEY` | yes | agent api key |
-| `DESKPRO_ENDPOINT` | yes | endpoint url (ie "https://accountname.deskpro.com") |
-| `DESKPRO_TEAM_ID` | no | id of team to assign tickets to |
+## Using Docker
 
-## Development
+This application supports docker for release scripts.
 
-Dependencies:
+To make use of it, follow these steps:
 
-* Ruby
-* Bundler
+1. Build the docker image
 
-You will find:
+    ```
+    $ docker build -t paas-product-page .
+    ```
 
-* The main application is `./app.rb`
-* General content page in `./views/`
-* Sass files in `./assets/stylesheets` (these will auto compile in dev mode)
+    You may also want to install the existing image instead:
 
-To start the server locally in development mode:
+    ```
+    $ docker pull governmentpaas/paas-product-page
+    ```
 
-```
-DESKPRO_TEAM_ID=1 DESKPRO_API_KEY='REDACTED' DESKPRO_ENDPOINT='https://account.deskpro.com' make dev
-```
+1. Run the image
+
+    With this command, you'll share the current directory with the docker
+    container and connect into it.
+
+    ```
+    $ docker run -ti --rm -v $(pwd):/app -w /app -p 127.0.0.1:4567:4567 paas-product-page ash
+    ```
+
+1. Run a desired action
+
+    ```
+    $ ./release/build
+    ```
+
+1. Run a live-reloading server
+
+    ```
+    $ bundle exec middleman server
+    ```
+
+    You can then view the site on the host machine at http://localhost:4567/
 
 ## Deploying changes
 
@@ -52,3 +71,19 @@ $ ./release/push
 Note: you will need the correct PaaS permissions as well as target your 
 desired organisation and space.
 
+## Redirection rules
+
+This project adds a custom `nginx.conf` that  supports redirection for a set
+of given domains. The domains should be in the `Host` or  X-Forwarded-Host`
+(for cloudfront) of the request header.
+
+This is useful for redirecting from an old domain or add a `www` prefix,
+like `cloud.service.gov.uk` to `www.cloud.service.gov.uk`.
+
+To change configure it, add the environment variable `REDIRECT_RULES` as follows:
+
+    REDIRECT_RULES=cloud.service.gov.uk:www.cloud.service.gov.uk,government-paas-developer-docs.readthedocs.io:www.cloud.service.gov.uk
+
+You can specify variables from nginx, like `$request_uri`:
+
+    REDIRECT_RULES='government-paas-developer-docs.readthedocs.io:www.cloud.service.gov.uk$request_uri'
