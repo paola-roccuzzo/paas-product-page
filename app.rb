@@ -14,6 +14,7 @@ class App < Sinatra::Base
 	set :sprockets, Sprockets::Environment.new
 	set :title, 'GOV.UK Platform as a Service'
 	set :erb, :escape_html => true
+	use Rack::Protection::ContentSecurityPolicy, :default_src => 'none', :script_src => '\'self\' www.google-analytics.com', :style_src => '\'self\'', :img_src => '\'self\' www.google-analytics.com', :connect_src => '\'self\'', :frame_src => '\'self\'', :font_src => '\'self\' data:', :object_src => '\'self\'', :media_src => '\'self\''
 
 	configure do
 		sprockets.append_path File.join(root, 'assets', 'stylesheets', 'govuk_frontend_toolkit')
