@@ -15,6 +15,11 @@ class App < Sinatra::Base
 	set :title, 'GOV.UK Platform as a Service'
 	set :erb, :escape_html => true
 
+	# IMPORTANT: The app does not have CSRF protection enabled and if
+	# you need sessions you should set that up appropriately using
+	# Rack::Protection.
+	set :sessions, false
+
 	use Rack::Protection::ContentSecurityPolicy,
 		:default_src => 'none',
 		:script_src => '\'self\' www.google-analytics.com',
