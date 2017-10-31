@@ -63,4 +63,17 @@ RSpec.describe "ContactUs", :type => :feature do
 		expect(page.status_code).to eq(400)
 	end
 
+	it "escapes XSS from the query string" do
+		visit '/contact-us?person_name=%22%3E%3Cscript%3Ealert(%27%27)%3C/script%3E'
+		# If the attack works, the HTML will have broken out of the value. If the attack failed, the HTML
+		# will be inside the value attribute.
+		expect(page.first('.form-group--person_name input').value).to eq("\"><script>alert('')</script>")
+	end
+
+	it "should provide the correct Content-Security-Policy" do
+		visit '/contact-us'
+		expect(page.status_code).to eq(200)
+		expect(page.response_headers['Content-Security-Policy']).to eq("connect-src 'self'; default-src none; font-src 'self' data:; frame-src 'self'; img-src 'self' www.google-analytics.com; media-src 'self'; object-src 'self'; script-src 'self' www.google-analytics.com; style-src 'self' 'unsafe-inline'")
+	end
+
 end
