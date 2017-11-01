@@ -2,7 +2,7 @@ require 'sinatra/base'
 require 'sinatra/reloader'
 require 'sinatra/content_for'
 require 'sprockets'
-require 'sprockets-helpers'
+require 'sinatra/sprockets-helpers'
 
 require './models/deskpro'
 require './models/forms'
@@ -20,6 +20,10 @@ class App < Sinatra::Base
 	# Rack::Protection.
 	set :sessions, false
 
+	# Critical protection against Path Traversal.
+	use Rack::Protection::PathTraversal
+
+	# Protection to limit potential XSS attacks and effects.
 	use Rack::Protection::ContentSecurityPolicy,
 		:default_src => 'none',
 		:script_src => '\'self\' www.google-analytics.com',
@@ -40,10 +44,9 @@ class App < Sinatra::Base
 		sprockets.append_path File.join(root, 'assets', 'js')
 		sprockets.append_path File.join(root, 'assets')
 		Sprockets::Helpers.configure do |config|
-			config.prefix      = '/'
+			config.debug = true if development?
+			config.prefix = "/"
 			config.environment = sprockets
-			config.public_path = public_folder
-			config.debug       = true if development?
 		end
 		register Sinatra::Reloader if development?
 	end
@@ -139,18 +142,28 @@ class App < Sinatra::Base
 	end
 
 	get '/*' do
-		# check for asset
+		path = params[:splat].first
+
+		# Check for an appropriately-named view
+		# Protected against directory traversal by Rack::Protection::PathTraversal
+		view_name = path.sub(/\.html$/, '')
+		if File.exist? "views/#{view_name}.erb"
+			# Strip `.html` extension if present
+			if path.match?(/\.html/)
+				return redirect("/#{view_name}", 301)
+			end
+
+			# Render the view's erb template
+			content_type 'text/html;charset=utf8'
+			return erb(view_name.to_sym)
+		end
+
+		# Check for an appropriately-named Sprocket asset
 		res = settings.sprockets.call(env)
 		return res if res && res[0] != 404
-		# check for a view name
-		path = params[:splat].first
-		viewname = path.sub(/\.html$/, '')
-		return not_found if !File.exist?("views/#{viewname}.erb")
-		# strip .html ext
-		return redirect("/#{viewname}", 301) if path.match?(/\.html/)
-		# render erb page
-		content_type 'text/html;charset=utf8'
-		erb viewname.to_sym
+
+		# Return 404 Not Found
+		not_found
 	end
 
 	not_found do
@@ -160,6 +173,7 @@ class App < Sinatra::Base
 
 	error do
 		@error = env['sinatra.error']
+		content_type 'text/html;charset=utf8'
 		erb :error
 	end
 
