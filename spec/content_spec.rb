@@ -1,7 +1,4 @@
 ENV['RACK_ENV'] = 'test'
-ENV['DESKPRO_API_KEY'] = FAKE_DESKPRO_API_KEY
-ENV['DESKPRO_ENDPOINT'] = FAKE_DESKPRO_ENDPOINT
-ENV['DESKPRO_TEAM_ID'] = '1'
 
 require 'rack/test'
 require 'capybara/rspec'
@@ -49,6 +46,12 @@ RSpec.describe "Content", :type => :feature do
 			location = last_response.headers['Location']
 			expect(location).not_to be_nil
 			expect(URI(location).path).to eq("#{parent_path}")
+		end
+
+		it "should provide the correct Content-Security-Policy" do
+			get parent_path
+			expect(last_response.status).to eq(200)
+			expect(last_response.headers['Content-Security-Policy']).to eq("connect-src 'self'; default-src none; font-src 'self' data:; frame-src 'self'; img-src 'self' www.google-analytics.com; media-src 'self'; object-src 'self'; script-src 'self' www.google-analytics.com; style-src 'self' 'unsafe-inline'")
 		end
 
 	end

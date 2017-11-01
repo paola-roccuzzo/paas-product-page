@@ -3,14 +3,10 @@ require 'sinatra/reloader'
 require 'sinatra/content_for'
 require 'sprockets'
 require 'sinatra/sprockets-helpers'
-
-require './models/deskpro'
-require './models/forms'
 require 'erubis'
 
 # App is the main Sinatra application
 class App < Sinatra::Base
-
 	set :sprockets, Sprockets::Environment.new
 	set :title, 'GOV.UK Platform as a Service'
 	set :erb, :escape_html => true
@@ -53,92 +49,9 @@ class App < Sinatra::Base
 
 	helpers Sinatra::ContentFor
 	helpers Sprockets::Helpers
-	helpers Forms::Helpers
 
 	get '/?' do
 		erb :index
-	end
-
-	get '/contact-us' do
-		@errors = {}
-		@ticket = Deskpro::Ticket.new
-		erb :'contact-us'
-	end
-
-	post '/contact-us' do
-		@errors = {}
-		@ticket = Deskpro::Ticket.new({
-			subject: "#{Date.today.to_s} Support Request From Website",
-			person_email: params[:person_email],
-			person_name: params[:person_name],
-			message: [
-				"department: #{params[:department_name]}",
-				"service: #{params[:service_name]}",
-				params[:message] || '',
-			].join("\n"),
-			label: ['paas'],
-		})
-		@ticket.agent_team_id = ENV['DESKPRO_TEAM_ID'].to_i if ENV['DESKPRO_TEAM_ID']
-		if not @ticket.valid?
-			@errors = @ticket.errors
-			status 400
-			erb :'contact-us'
-		else
-			begin
-				deskpro.post @ticket
-				@msg = "We’ll contact you in the next working day"
-				erb :thanks
-			rescue => ex
-				status 500
-				@errors[:fatal] = [ex.to_s]
-				erb :'contact-us'
-			end
-		end
-	end
-
-	get '/signup' do
-		@errors = {}
-		@form = Forms::Signup.new({
-			:person_is_manager => true,
-			:invites => 3.times.map{ Forms::Invite.new({
-				:person_email => '',
-				:person_is_manager => false
-			}) }
-		})
-		erb :signup
-	end
-
-	post '/signup' do
-		@errors = {}
-		@form = Forms::Signup.new({
-			:person_email => params[:person_email] || '',
-			:person_name => params[:person_name] || '',
-			:person_is_manager => params[:person_is_manager] == 'true',
-			:department_name => params[:department_name] || '',
-			:service_name => params[:service_name] || '',
-			:invite_users => params[:invite_users] == 'true',
-			:invites => (params[:invites] || {'0': {:person_email => '', :person_is_manager => false}}).map{ |indexKey, invite|
-				Forms::Invite.new({
-					:person_email => invite[:person_email] || '',
-					:person_is_manager => invite[:person_is_manager] == 'true',
-				})
-			}.reject{|invite| invite.person_email.empty? }
-		})
-		if not @form.valid?
-			@errors = @form.errors
-			status 400
-			return erb :signup
-		else
-			begin
-				deskpro.post @form.to_ticket
-				@msg = "We’ll email you with your organisation account details in the next working day."
-				erb :thanks
-			rescue => ex
-				status 500
-				@errors[:fatal] = [ex.to_s]
-				erb :signup
-			end
-		end
 	end
 
 	get '/*' do
@@ -183,17 +96,4 @@ class App < Sinatra::Base
 		content_type 'text/html;charset=utf8'
 		erb :error
 	end
-
-	helpers do
-
-		# create a deskpro client
-		def deskpro
-			Deskpro::Client.new(
-				api_key: ENV['DESKPRO_API_KEY'],
-				endpoint: ENV['DESKPRO_ENDPOINT']
-			)
-		end
-
-	end
-
 end
