@@ -10,7 +10,9 @@
 	<div class="grid-row">
 		<div class="column-two-thirds">
 			<h1 class="heading-large">We were unable to process the page as expected.</h1>
-			<p><%= @error %></p>
+			<% if settings.development? %>
+				<p><%= @error %></p>
+			<% end %>
 		</div>
 	</div>
 </div>

@@ -177,7 +177,9 @@ class App < Sinatra::Base
 	end
 
 	error do
-		@error = env['sinatra.error']
+		if settings.development?
+			@error = env['sinatra.error']
+		end
 		content_type 'text/html;charset=utf8'
 		erb :error
 	end
