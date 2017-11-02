@@ -1,0 +1,83 @@
+
+<% content_for :head do %>
+  <title>Trial Account - <%= settings.title %></title>
+<% end %>
+
+<% content_for :breadcrumb do %>
+  <%== erb :'partials/_breadcrumb', :locals => {name: 'Trial Account', href: request.path_info, active: true} %>
+<% end %>
+
+<div class="container">
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <h1 class="heading-xlarge">Starting using GOV.UK PaaS</h1>
+
+            <p>
+              Anyone with a government email address can have a GOV.UK PaaS
+              trial account.
+            </p>
+
+            <p>
+                To request an account, contact us at
+                <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">
+                  gov-uk-paas-support@digital.cabinet-office.gov.uk
+                </a>
+                and tell us:
+            </p>
+
+            <ul class="list list-bullet">
+                <li>
+                  the name of your department and service team (if applicable)
+                </li>
+                <li>
+                  email addresses of the people who should have a GOV.UK PaaS
+                  account
+                </li>
+                <li>
+                  the people who should administer the account and assign roles
+                  and permissions (Org managers). Ideally, you should have at
+                  least two Org managers per account.
+                </li>
+            </ul>
+
+            <p>
+                You can use our
+                <a href="https://docs.cloud.service.gov.uk/#quick-setup-guide">
+                  Quick setup guide
+                </a>
+                to get started and deploy a test application.
+            </p>
+
+            <h2 class="heading-large">
+              Joining an existing GOV.UK PaaS account
+            </h2>
+
+            <p>
+                If your team is already using GOV.UK PaaS and you would like a
+                user account, ask an Org Manager on your team to
+                <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">
+                  contact us
+                </a>
+                and make a request.
+            </p>
+
+            <p>
+              Users with non-government email addresses can be added to an
+              account at the request of an Org Manager.
+            </p>
+
+            <h2 class="heading-large">Your privacy</h2>
+
+            <p>
+              We need to store data about you to provide your account. See our
+              <a href="https://docs.cloud.service.gov.uk/#privacy-policy">
+                privacy policy
+              </a>
+              for details.
+            </p>
+
+        </div>
+
+        <div class="column-one-third"></div>
+    </div>
+</div>

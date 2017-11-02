@@ -1,0 +1,5 @@
+<li class="breadcrumbs__item <%= defined? active && active ? 'breadcrumbs__item--active' : '' %>" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+	<a href="<%= href || '#' %>" itemprop="item">
+		<span itemprop="name"><%= name %></span>
+	</a>
+</li>
