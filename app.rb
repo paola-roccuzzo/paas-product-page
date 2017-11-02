@@ -144,18 +144,23 @@ class App < Sinatra::Base
 	get '/*' do
 		path = params[:splat].first
 
-		# Check for an appropriately-named view
-		# Protected against directory traversal by Rack::Protection::PathTraversal
+		# Check for a relevant erb template
 		view_name = path.sub(/\.html$/, '')
-		if File.exist? "views/#{view_name}.erb"
-			# Strip `.html` extension if present
-			if path.match?(/\.html/)
-				return redirect("/#{view_name}", 301)
-			end
+		# Protected against directory traversal by Rack::Protection::PathTraversal
+		# We also restrict view names to alphanumeric, dash and underscore characters.
+		# These are definitively safe against being used for directory traversal/etc.
+		if !/[^a-zA-Z0-9_-]/.match(view_name)
+			# Check for an appropriately-named view
+			if File.exist? "views/#{view_name}.erb"
+				# Strip `.html` extension if present
+				if path.match?(/\.html/)
+					return redirect("/#{view_name}", 301)
+				end
 
-			# Render the view's erb template
-			content_type 'text/html;charset=utf8'
-			return erb(view_name.to_sym)
+				# Render the view's erb template
+				content_type 'text/html;charset=utf8'
+				return erb(view_name.to_sym)
+			end
 		end
 
 		# Check for an appropriately-named Sprocket asset
