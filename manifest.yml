@@ -1,7 +1,7 @@
 ---
 applications:
   - name: paas-product-page
-    buildpack: https://github.com/cloudfoundry/ruby-buildpack.git
+    buildpack: ruby_buildpack
     memory: 128M
     instances: 2
     env:
