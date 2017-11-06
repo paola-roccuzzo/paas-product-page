@@ -1,0 +1,109 @@
+<% content_for :head do %>
+	<title>Request Account - <%= settings.title %></title>
+<% end %>
+
+<% content_for :breadcrumb do %>
+	<%== erb :'partials/_breadcrumb', :locals => {name: 'Get started', href: '/get-started'} %>
+	<%== erb :'partials/_breadcrumb', :locals => {name: 'Signup', href: '/signup', active: true} %>
+<% end %>
+
+<div class="container">
+	<div class="grid-row">
+		<div class="column-full filter-fields">
+			<div class="back">
+				<a href="/get-started" class="link-back step-back">Back</a>
+			</div>
+		</div>
+		<div class="column-two-thirds">
+			<h1 class="heading-large">Request a GOV.UK PaaS account</h1>
+			<% if @errors && @errors.size > 0 %>
+				<div class="error-summary" role="alert" aria-labelledby="error-summary-heading-example-1" tabindex="-1">
+					<h2 class="heading-medium error-summary-heading" id="error-summary-heading-example-1">There were problems submitting your request</h2>
+					<ul class="error-summary-list">
+						<% @errors.each do |field, err| %>
+							<% err.each do |err| %>
+								<li class="err"><a href="#" class="focus-field" data-field="<%= field.to_s %>"><%= err %></a></li>
+							<% end %>
+						<% end %>
+					</ul>
+				</div>
+			<% end %>
+			<form action="/signup" method="post">
+
+				<div class="step step--join-organisation">
+					<p>If your team is already using GOV.UK PaaS and you would like a user account, ask your Org Manager to contact us and make a request at:<br><a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a></p>
+					<p>Org Managers administer the account and assign roles and permissions.</p>
+					<p>Users with non-government email addresses can be added to an account at the request of an Org Manager.</p>
+					<div class="form-group">
+						<a class="button button" href="/contact-us">Contact support</a> </p>
+					</div>
+				</div>
+
+				<div class="step step--start step--all">
+					<p>Service teams on GOV.UK PaaS own and use an account called an `organisation`.</p>
+					<div class="form-group js-show" style="display:none;">
+						<fieldset>
+							<legend>
+								<span class="form-label-bold">Do you want to create an organisation?</span>
+								<span class="form-hint">An organisation typically represents the government department, agency or team you work for.</span>
+							</legend>
+							<div class="multiple-choice">
+								<input id="choose-create" type="radio" name="step" value="step--about-you" checked="checked">
+								<label for="choose-create">Yes, I'm new to PaaS and want to create an organisation</label>
+
+							</div>
+							<div class="multiple-choice">
+								<input id="choose-join" type="radio" name="step" value="step--join-organisation">
+								<label for="choose-join">No, I'd like to join an existing organisation</label>
+							</div>
+						</fieldset>
+					</div>
+					<div class="form-group">
+						<button class="button step-button step--1-button" style="display:none;" disabled="disabled">Continue</button>
+					</div>
+				</div>
+
+				<div class="step step--about-you step--all">
+					<h2 class="heading-medium">Your details</h2>
+					<%== input_for(@form, :person_name, label: 'Name') %>
+					<%== input_for(@form, :person_email, label: 'Email address', hint: 'We can only accept requests from government organisation addresses') %>
+					<div class="form-group">
+						<input type="hidden" name="step" value="step--create-organisation">
+						<button class="button step-button" style="display:none;">Continue</button>
+					</div>
+				</div>
+
+				<div class="step step--create-organisation step--all">
+					<h2 class="heading-medium">Your organisation</h2>
+					<%== input_for(@form, :department_name, label: 'Name of your government department or agency') %>
+					<%== input_for(@form, :service_name, label: 'Name of the service or team you work on') %>
+					<%== radio_for(@form, :person_is_manager, label: 'Will you be a manager of this organisation?', hint: 'Organisations are controlled by ‘org managers’ who are responsible for administering the account and assigning roles and permissions to users within the organisation', options: [
+						{label: 'Yes, I will be an org manager for this organisation', value: true},
+						{label: 'No, I will nominate someone else to be an org manager', value: false, note: 'You will need to specify at least one ‘org manager’ in order for us to set up your organisation. If you do not intend to manage the organisation yourself you can invite your nominated manager in the following section.'},
+					]) %>
+					<div class="form-group">
+						<input type="hidden" name="step" value="step--invite-users">
+						<button class="button step-button" style="display:none;">Continue</button>
+					</div>
+				</div>
+
+				<div class="step step--invite-users step--all">
+					<h2 class="heading-medium">Invite users to your organisation</h2>
+					<p>Users who aren’t Org Managers can deploy code but won’t be able to administer the account.</p>
+					<%== erb :'partials/_invites', :locals => {error: errors_for(@form, :invites)} %>
+					<div class="form-group">
+						<button id="signup-submit" type="submit" class="button">Submit request</button>
+					</div>
+				</div>
+
+			</form>
+		</div>
+		<div class="column-one-third"></div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="grid-row">
+	</div>
+</div>
+

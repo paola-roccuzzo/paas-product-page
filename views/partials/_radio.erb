@@ -1,0 +1,20 @@
+<div class="form-group form-group--<% name %> <%= error ? 'form-group-error' : '' %>">
+	<fieldset>
+		<legend>
+			<span class="form-label-bold"><%= label %></span>
+			<span class="form-hint"><%= hint %></span>
+			<span class="error-message"><%= error %></span>
+		</legend>
+		<% options.each_with_index do |opt, idx| %>
+			<div class="multiple-choice">
+				<input id="<%= name %>-<%= idx %>" class="toggle-radio-note" type="radio" name="<%= name %>" value="<%== opt[:value] || idx.to_s %>" <%= value == opt[:value] ? 'checked="checked"' : '' %>>
+				<label for="<%= name %>-<%= idx %>"><%= opt[:label] || "Option #{idx}" %></label>
+			</div>
+			<% if opt[:note] %>
+				<div id="<%= name %>-<%= idx %>--note" class="radio-note panel panel-border-narrow" style="display:none; margin-top: 10px;">
+					<p><%= opt[:note] %></p>
+				</div>
+			<% end %>
+		<% end %>
+	</fieldset>
+</div>
