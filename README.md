@@ -6,7 +6,13 @@ It is a Ruby/Sinatra app that makes use of the GOV.UK Elements, Frontend Toolkit
 
 ## Configuration
 
-There is no configuration necessary for correct deployment.
+The following environment variables should be set for correct deployment:
+
+| variable | required | description |
+|---|---|---|
+| `DESKPRO_API_KEY` | yes | agent api key |
+| `DESKPRO_ENDPOINT` | yes | endpoint url (ie "https://accountname.deskpro.com") |
+| `DESKPRO_TEAM_ID` | no | id of team to assign tickets to |
 
 ## Development
 
@@ -24,7 +30,7 @@ You will find:
 To start the server locally in development mode:
 
 ```
-make dev
+DESKPRO_TEAM_ID=1 DESKPRO_API_KEY='REDACTED' DESKPRO_ENDPOINT='https://account.deskpro.com' make dev
 ```
 
 ## Deploying changes
@@ -43,6 +49,6 @@ Check in your changes to master.
 $ ./release/push
 ```
 
-Note: you will need the correct PaaS permissions as well as target your
+Note: you will need the correct PaaS permissions as well as target your 
 desired organisation and space.
 
