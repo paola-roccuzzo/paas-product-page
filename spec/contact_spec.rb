@@ -73,7 +73,7 @@ RSpec.describe "ContactUs", :type => :feature do
 	it "should provide the correct Content-Security-Policy" do
 		visit '/contact-us'
 		expect(page.status_code).to eq(200)
-		expect(page.response_headers['Content-Security-Policy']).to eq("connect-src 'self'; default-src none; font-src 'self' data:; frame-src 'self'; img-src 'self' www.google-analytics.com; media-src 'self'; object-src 'self'; script-src 'self' www.google-analytics.com; style-src 'self' 'unsafe-inline'")
+		expect(page.response_headers['Content-Security-Policy']).to eq("connect-src 'self' www.google-analytics.com; default-src none; font-src 'self' data:; frame-src 'self'; img-src 'self' www.google-analytics.com; media-src 'self'; object-src 'self'; script-src 'self' www.google-analytics.com; style-src 'self' 'unsafe-inline'")
 	end
 
 end

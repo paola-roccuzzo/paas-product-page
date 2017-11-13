@@ -25,15 +25,15 @@ class App < Sinatra::Base
 
 	# Protection to limit potential XSS attacks and effects.
 	use Rack::Protection::ContentSecurityPolicy,
-		:default_src => 'none',
-		:script_src => '\'self\' www.google-analytics.com',
-		:style_src => '\'self\' \'unsafe-inline\'',
-		:img_src => '\'self\' www.google-analytics.com',
-		:connect_src => '\'self\'',
-		:frame_src => '\'self\'',
-		:font_src => '\'self\' data:',
-		:object_src => '\'self\'',
-		:media_src => '\'self\''
+		:default_src => "none",
+		:script_src => "'self' www.google-analytics.com",
+		:style_src => "'self' 'unsafe-inline'",
+		:img_src => "'self' www.google-analytics.com",
+		:connect_src => "'self' www.google-analytics.com",
+		:frame_src => "'self'",
+		:font_src => "'self' data:",
+		:object_src => "'self'",
+		:media_src => "'self'"
 
 	configure do
 		sprockets.append_path File.join(root, 'assets', 'stylesheets', 'govuk_frontend_toolkit')
