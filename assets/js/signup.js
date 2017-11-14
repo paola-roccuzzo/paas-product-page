@@ -19,6 +19,8 @@ $(function(){
 		$('.step').hide();
 		$(selector).show();
 		stepStack.push(selector);
+
+		window.history.pushState({step: selector}, selector, window.location.pathname);
 	}
 
 	function clickStepButton(e) {
@@ -36,11 +38,19 @@ $(function(){
 		stepStack.pop();
 		var prevSelector = stepStack.pop();
 		if (prevSelector) {
-			console.log(prevSelector);
 			setStep(prevSelector);
 		} else {
 			window.location.href = $(this).attr('href');
 		}
+	}
+
+	function goBack(e) {
+		if (window.location.pathname === '/signup' && stepStack.length > 1) {
+			clickStepBack(e);
+			return;
+		}
+
+		window.history.go(-1);
 	}
 
 	function toggleInviteRadio() {
@@ -140,7 +150,7 @@ $(function(){
 			group.addClass('form-group-error');
 			group.find('.error-message').text(errs[k]);
 			hasErrors = true;
-			console.log('err', k, errs[k]);
+			console.error(k, errs[k]);
 		}
 		return hasErrors;
 	}
@@ -171,6 +181,9 @@ $(function(){
 
 	function init() {
 		var hasErrors = $('.form-group-error, .error-summary').length > 0;
+
+		$(window)
+			.on('popstate', goBack);
 
 		// setup event handlers
 		$('.step-button').click(clickStepButton);
