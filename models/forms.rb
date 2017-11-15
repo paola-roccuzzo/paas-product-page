@@ -3,16 +3,16 @@ require './models/model'
 module Forms
 
 	class Invite < Model
-		field :person_name,                  String
-		field :person_email,                 String, :match => /.+@.+\..+/
+		field :person_name,                  String, :label => 'Name'
+		field :person_email,                 String, :match => /.+@.+\..+/, :label => 'Email address'
 		field :person_is_manager,            Boolean
 	end
 
 	class Signup < Model
-		field :person_email,                 String, :required => true, :match => /.+@.+\.gov\.uk$/, :min => 5
-		field :person_name,                  String, :required => true, :min => 2
+		field :person_email,                 String, :required => true, :match => /.+@.+\.gov\.uk$/, :min => 5, :label => 'Email address'
+		field :person_name,                  String, :required => true, :min => 2, :label => 'Name'
 		field :person_is_manager,            Boolean
-		field :department_name,              String, :required => true 
+		field :department_name,              String, :required => true
 		field :service_name,                 String, :required => true
 		field :invite_users,                 Boolean
 		field :invites,                      Array, :of => Invite
