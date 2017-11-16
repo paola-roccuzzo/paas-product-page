@@ -87,7 +87,7 @@ class Model
 		validate.inject({}) do |h, err|
 			k = err[:name]
 			h[k] ||= []
-			h[k] << "#{err[:name].to_s.gsub(/_/, ' ')} #{err[:message]}"
+			h[k] << "#{err[:label]} #{err[:message]}"
 			h
 		end
 	end
@@ -100,17 +100,18 @@ class Model
 		self.class.fields.inject([]) do |errs, (name, opts)|
 			if @values.has_key?(name)
 				value = @values[name]
+				msg = nil
 				if !value.kind_of? opts[:type]
-					errs.push({name: name, message: "must be of type #{opts[:type]} not #{value.class.name}"})
+					msg = "must be of type #{opts[:type]} not #{value.class.name}"
 				elsif opts[:type] == String
 					if opts[:required] && (!value || value.strip.size == 0)
-						errs.push({name: name, message: "must not be blank"})
+						msg = "cannot be blank"
 					elsif opts.has_key?(:min) and value.size < opts[:min]
-						errs.push({name: name, message: "is too short"})
-					elsif opts.has_key?(:max) and value.size > opts[:max] 
-						errs.push({name: name, message: "is too long"})
+						msg = "is too short"
+					elsif opts.has_key?(:max) and value.size > opts[:max]
+						msg = "is too long"
 					elsif opts.has_key?(:match) and !opts[:match].match?(value)
-						errs.push({name: name, message: "is not valid"})
+						msg = "is not valid"
 					end
 				elsif opts[:type] == Array
 					if opts[:of] < Model
@@ -118,16 +119,17 @@ class Model
 						errs.push({name: name, message: "#{err[:name].to_s.gsub(/_/,' ')}: #{err[:message]}"}) if err
 					elsif opts[:of]
 						if !value.all?{|v| v.kind_of?(opts[:of]) }
-							errs.push({name: name, message: "must only contain #{opts[:of]} elements"})
+							msg = "must only contain #{opts[:of]} elements"
 						end
 					end
 				else
 					if opts.has_key?(:min) and value < opts[:min]
-						errs.push({name: name, message: "must be at least #{opts[:min]}"})
-					elsif opts.has_key?(:max) and value > opts[:max] 
-						errs.push({name: name, message: "must be at most #{opts[:max]}"})
+						msg = "must be at least #{opts[:min]}"
+					elsif opts.has_key?(:max) and value > opts[:max]
+						msg = "must be at most #{opts[:max]}"
 					end
 				end
+				errs.push({name: name, message: msg, label: opts[:label] || name}) if !msg.nil?
 			else
 				errs.push({name: name, message: 'required'}) if opts[:required]
 			end

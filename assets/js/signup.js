@@ -19,6 +19,8 @@ $(function(){
 		$('.step').hide();
 		$(selector).show();
 		stepStack.push(selector);
+
+		window.history.pushState({step: selector}, selector, window.location.pathname);
 	}
 
 	function clickStepButton(e) {
@@ -36,11 +38,19 @@ $(function(){
 		stepStack.pop();
 		var prevSelector = stepStack.pop();
 		if (prevSelector) {
-			console.log(prevSelector);
 			setStep(prevSelector);
 		} else {
 			window.location.href = $(this).attr('href');
 		}
+	}
+
+	function goBack(e) {
+		if (window.location.pathname === '/signup' && stepStack.length > 1) {
+			clickStepBack(e);
+			return;
+		}
+
+		window.history.go(-1);
 	}
 
 	function toggleInviteRadio() {
@@ -140,7 +150,7 @@ $(function(){
 			group.addClass('form-group-error');
 			group.find('.error-message').text(errs[k]);
 			hasErrors = true;
-			console.log('err', k, errs[k]);
+			console.error(k, errs[k]);
 		}
 		return hasErrors;
 	}
@@ -169,16 +179,35 @@ $(function(){
 		}
 	};
 
+	function selfDeclareManager(e) {
+	  var value = $(e.target).attr('value'),
+	    $element;
+
+	  if (value === '1') {
+	    $element = $("[name=invite_users][value=true]");
+	  } else {
+	    $element = $("[name=invite_users][value=false]");
+	  }
+
+	  $element.prop('checked', true).trigger('click');
+	}
+
 	function init() {
 		var hasErrors = $('.form-group-error, .error-summary').length > 0;
 
 		// setup event handlers
-		$('.step-button').click(clickStepButton);
-		$('.step-back').click(clickStepBack);
-		$('.invite-radio').change(toggleInviteRadio);
-		$('.person-is-manager').change(toggleIsManagerRadio)
-		$('.focus-field').click(focusField);
-		$('#add-more-invites').click(addInviteRow);
+		$(window)
+			.on('popstate', goBack);
+
+		$(document)
+			.on('change', '[name=person_is_manager]', selfDeclareManager)
+			.on('click', '.step-button', clickStepButton)
+			.on('click', '.step-back', clickStepBack)
+			.on('click', '.invite-radio', toggleInviteRadio)
+			.on('click', '.person-is-manager', toggleIsManagerRadio)
+			.on('click', '.focus-field', focusField)
+			.on('click', '#add-more-invites', addInviteRow);
+
 		$('.toggle-radio-note').change(toggleRadioNote).each(toggleRadioNote);
 
 		// trigger initial state

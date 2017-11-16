@@ -86,8 +86,8 @@ module Deskpro
 		path '/tickets'
 		field :id,                           Integer, :min => 1
 		field :person_id,                    Integer
-		field :person_email,                 String, :required => true, :match => VALID_EMAIL_REGEX, :min => 5, :max => MAX_FIELD_LEN
-		field :person_name,                  String, :required => true, :min => 2, :max => MAX_FIELD_LEN
+		field :person_email,                 String, :required => true, :match => VALID_EMAIL_REGEX, :min => 5, :max => MAX_FIELD_LEN, :label => 'Email address'
+		field :person_name,                  String, :required => true, :min => 2, :max => MAX_FIELD_LEN, :label => 'Name'
 		field :person_organization,          String
 		field :person_organization_position, String
 		field :subject,                      String, :required => true, :max => MAX_FIELD_LEN, :min => 1
