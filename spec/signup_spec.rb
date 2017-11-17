@@ -18,6 +18,7 @@ RSpec.describe "Signup", :type => :feature do
 		fill_in('person_email', with: 'jeff@test.gov.uk')
 		fill_in('department_name', with: 'TestDept')
 		fill_in('service_name', with: 'TestService')
+		find('input#person_is_manager-0.toggle-radio-note').set(true)
 		click_button('signup-submit')
 		all('.error-message').each do |err|
 			expect(err.text).to be_empty, "Did not expect to see any validation errors but got: #{err.text}"
@@ -100,6 +101,23 @@ RSpec.describe "Signup", :type => :feature do
 		click_button('signup-submit')
 		expect(page.first('.form-group--invites .error-message').text).not_to be_empty
 		expect(page.status_code).to eq(400)
+	end
+
+	it "should submit the form successfully when not an org manager" do
+		visit '/signup'
+		fill_in('person_name', with: 'Jeff Jefferson')
+		fill_in('person_email', with: 'jeff@test.gov.uk')
+		fill_in('department_name', with: 'TestDept')
+		fill_in('service_name', with: 'TestService')
+		find('input#person_is_manager-1.toggle-radio-note').set(true)
+		click_button('signup-submit')
+		all('.error-message').each do |err|
+			expect(err.text).to be_empty, "Did not expect to see any validation errors but got: #{err.text}"
+		end
+		all('.error-summary .err').each do |err|
+			expect(err.text).to be_empty, "Did not expect to see a summary of errors but got: #{err.text}"
+		end
+		expect(page.status_code).to eq(200)
 	end
 
 end

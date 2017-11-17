@@ -26,7 +26,7 @@ module Forms
 				"New organisation/account signup request from website",
 				"",
 				"From: #{person_name}",
-				"Email: #{person_email}",
+				"Email: #{person_email} #{"(org manager)" if person_is_manager}",
 				"Department: #{department_name}",
 				"Team: #{service_name}",
 			].join("\n")
@@ -34,7 +34,7 @@ module Forms
 				msg << ([
 					"",
 					"They would also like to invite:",
-				] + invites.map{ |invite| "#{invite.person_email} (org manager: #{!!invite.person_is_manager})" }).join("\n")
+				] + invites.map{ |invite| "#{invite.person_email} #{"(org manager)" if invite.person_is_manager}" }).join("\n")
 			end
 			msg
 		end
