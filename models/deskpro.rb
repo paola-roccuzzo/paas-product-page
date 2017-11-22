@@ -90,6 +90,7 @@ module Deskpro
 		field :person_name,                  String, :required => true, :min => 2, :max => MAX_FIELD_LEN, :label => 'Name'
 		field :person_organization,          String
 		field :person_organization_position, String
+		field :person_is_manager,            Boolean
 		field :subject,                      String, :required => true, :max => MAX_FIELD_LEN, :min => 1
 		field :message,                      String, :required => true, :max => MAX_FIELD_LEN, :min => 1
 		field :message_as_agent,             Integer, :min => 0, :max => 1

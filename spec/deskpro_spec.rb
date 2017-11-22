@@ -8,6 +8,7 @@ RSpec.describe Deskpro do
 			ticket = Deskpro::Ticket.new({
 				person_email: "test@localhost.local",
 				subject: "HELP",
+				person_is_manager: false,
 				message: "Please help me",
 				agent_team_id: 1,
 				message_as_agent: 1,
@@ -15,6 +16,7 @@ RSpec.describe Deskpro do
 			})
 			expect(ticket.person_email).to eq('test@localhost.local')
 			expect(ticket.subject).to eq('HELP')
+			expect(ticket.person_is_manager).to eq(false)
 			expect(ticket.message).to eq('Please help me')
 			expect(ticket.agent_team_id).to eq(1)
 			expect(ticket.message_as_agent).to eq(1)
