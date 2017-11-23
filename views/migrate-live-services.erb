@@ -1,0 +1,47 @@
+
+<% content_for :head do %>
+	<title>Migrate a live service to GOV.UK PaaS - <%= settings.title %></title>
+<% end %>
+
+<% content_for :breadcrumb do %>
+	<%== erb :'partials/_breadcrumb', :locals => {name: 'Get started', href: request.path_info, active: true} %>
+<% end %>
+
+<div class="container">
+	<div class="grid-row">
+		<div class="column-one-third">
+			<nav class="sub-navigation">
+				<ol itemscope itemtype="http://schema.org/ItemList">
+					<li class="sub-navigation__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+						<a href="/get-started" itemprop="item"><span itemprop="name">Evaluate the platform</span></a>
+					</li>
+					<li class="sub-navigation__item sub-navigation__item--active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+						<a href="/migrate-live-services" itemprop="item"><span itemprop="name">Migrate a live service to GOV.UK PaaS</span></a>
+					</li>
+				</ol>
+			</nav>
+		</div>
+
+		<div class="column-two-thirds">
+			<h1 class="heading-xlarge">Migrate a live service to GOV.UK PaaS</h2>
+			<p>
+				Any migration typically involves switching costs. In the case of GOV.UK PaaS you should consider:
+
+				<ul class="list list-bullet">
+					<li>the features we offer and the <a href="https://docs.cloud.service.gov.uk/#paas-requirements">languages and frameworks</a> we currently support</li>
+					<li>the releases planned in our <a href="/roadmap">roadmap</a> - bear in mind that we are always looking for private beta partners for new features</li>
+					<li>any work involved in making your applications follow the <a href="https://12factor.net/">12-factor app principles</a></li>
+					<li>the effort required to separate a monolithic service into components</li>
+				</ul>
+			</p>
+
+			<p>
+				Consider also the risks: some issues might only be visible when using production-scale data. We can mitigate that risk by granting short-term access to paid services, but tenants should be careful when using production data.
+			</p>
+
+			<p>
+				You should also evaluate the platform features with our 3-month trial period. If you think that GOV.UK PaaS could be an option for your service, get in contact with <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.
+			</p>
+		</div>
+	</div>
+</div>
