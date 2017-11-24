@@ -145,3 +145,24 @@ table th {
 legend {
 	padding-left:0;
 }
+
+.govuk-box-highlight-green {
+	background: none;
+	border: 5px $green solid;
+	margin: 2em 0 0 0;
+	padding: 1em;
+
+	p {
+		color: $green;
+		font-weight: 700;
+		margin-bottom: .5em;
+		padding-top: 10px;
+	}
+}
+
+.download-section {
+	background-color: $highlight-colour;
+	border: 10px solid $panel-colour;
+	margin: 15px 0 5px;
+	padding: 5px;
+}
