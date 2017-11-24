@@ -1,0 +1,117 @@
+<% content_for :head do %>
+    <title>Start using GOV.UK PaaS - <%= settings.title %></title>
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <%== erb :'partials/_breadcrumb', :locals => {name: 'Get started', href: '/get-started'} %>
+    <%== erb :'partials/_breadcrumb', :locals => {name: 'Start using GOV.UK PaaS', href: '/next-steps', active: true} %>
+<% end %>
+
+<div class="container">
+  <div class="grid-row">
+    <% if params.key?('success') %>
+        <div class="column-full">
+          <div class="govuk-box-highlight-green account-created">
+            <p>Your account has been activated</p>
+          </div>
+        </div>
+    <% end %>
+
+    <div class="column-two-thirds">
+      <h1 class="heading-large">
+        Start using GOV.UK PaaS
+      </h1>
+
+      <p class="lede">
+        A lot of the tasks you’ll need to do to operate GOV.UK PaaS will be done from your computers
+        command line interface.
+      <p>
+    </div>
+  </div>
+
+  <div class="grid-row download-section">
+    <div class="column-two-thirds">
+      <h2 class="heading-small">
+        Download the Cloud Foundry command line tool
+      </h2>
+
+      <p>
+        You’ll need to do this to operate GOV.UK PaaS from your terminal. You can download the cf command line tool
+        using one of the installers shown. You can also visit the github page for
+        <a href="https://github.com/cloudfoundry/cli#downloads">other download options</a> such as using package
+        managers.
+      </p>
+    </div>
+
+    <div class="column-one-third">
+      <p class="heading-small">Installation options: </p>
+
+      <ul class="list-bullet">
+        <li><a href="https://packages.cloudfoundry.org/stable?release=macosx64&amp;source=github">Mac OS X 64 bit</a></li>
+        <li><a href="https://packages.cloudfoundry.org/stable?release=windows64&amp;source=github">Windows 64 bit</a></li>
+        <li><a href="https://packages.cloudfoundry.org/stable?release=debian64&amp;source=github">Debian 64 bit</a></li>
+        <li><a href="https://packages.cloudfoundry.org/stable?release=redhat64&amp;source=github">RedHat 64 bit</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-full">
+      <h2 class="heading-medium">Here are some tasks you can do next</h2>
+    </div>
+
+    <div class="column-one-third">
+      <h2 class="heading-small">
+        <a href="https://docs.cloud.service.gov.uk/#setting-up-the-command-line">Setup and deploy your first app</a>
+      </h2>
+
+      <p>View our quick setup guide on deploying your first app to GOV.UK PaaS.</p>
+    </div>
+
+    <div class="column-one-third">
+      <h2 class="heading-small">
+        <a href="https://docs.cloud.service.gov.uk/#managing-users">View and manage team members</a>
+      </h2>
+
+      <p>
+        If you are an ‘org manager’ you can administer team members. Learn how to do this using the command line
+        tool.
+      </p>
+    </div>
+
+    <div class="column-one-third">
+      <h2 class="heading-small">
+        <a href="https://docs.cloud.service.gov.uk">View all documentation</a>
+      </h2>
+
+      <p>
+        Our documentation covers all aspects of using GOV.UK PaaS, from managing and scaling your applications to
+        troubleshooting.
+      </p>
+    </div>
+  </div>
+
+  <div class="grid-row">
+    <div class="column-one-third">
+      <h2 class="heading-small">
+        <a href="/get-started">See steps to going live</a>
+      </h2>
+
+      <p>
+        See an overview of the steps your service needs to take to go live on GOV.UK PaaS.
+      </p>
+    </div>
+
+    <div class="column-one-third">
+      <!-- FIXME: Pricing calculator is not live yet.
+      <h2 class="heading-small">
+        <a href="/pricing-calculator-accordion">Get a cost estimation</a>
+      </h2>
+
+      <p>
+        Use our calculator to estimate how much it will cost your service to use GOV.UK PaaS.
+      </p>
+      -->
+    </div>
+  </div>
+</div>
