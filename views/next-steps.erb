@@ -1,10 +1,10 @@
 <% content_for :head do %>
-    <title>Start using GOV.UK PaaS - <%= settings.title %></title>
+    <title>Access GOV.UK PaaS - <%= settings.title %></title>
 <% end %>
 
 <% content_for :breadcrumb do %>
     <%== erb :'partials/_breadcrumb', :locals => {name: 'Get started', href: '/get-started'} %>
-    <%== erb :'partials/_breadcrumb', :locals => {name: 'Start using GOV.UK PaaS', href: '/next-steps', active: true} %>
+    <%== erb :'partials/_breadcrumb', :locals => {name: 'Access GOV.UK PaaS', href: '/next-steps', active: true} %>
 <% end %>
 
 <div class="container">
@@ -19,12 +19,11 @@
 
     <div class="column-two-thirds">
       <h1 class="heading-large">
-        Start using GOV.UK PaaS
+        Access GOV.UK PaaS
       </h1>
 
       <p class="lede">
-        A lot of the tasks you’ll need to do to operate GOV.UK PaaS will be done from your computers
-        command line interface.
+        Installing the Cloud Foundry command line will let you operate GOV.UK PaaS from your computer.
       <p>
     </div>
   </div>
@@ -32,19 +31,16 @@
   <div class="grid-row download-section">
     <div class="column-two-thirds">
       <h2 class="heading-small">
-        Download the Cloud Foundry command line tool
+        Download the Cloud Foundry command line interface (cf CLI)
       </h2>
 
       <p>
-        You’ll need to do this to operate GOV.UK PaaS from your terminal. You can download the cf command line tool
-        using one of the installers shown. You can also visit the github page for
-        <a href="https://github.com/cloudfoundry/cli#downloads">other download options</a> such as using package
-        managers.
+        Use one of the links to download the cf CLI installer. You can also visit the github page for <a href="https://github.com/cloudfoundry/cli#downloads">other download options</a> such as package managers and compressed binaries.
       </p>
     </div>
 
     <div class="column-one-third">
-      <p class="heading-small">Installation options: </p>
+      <p class="heading-small">Installers:</p>
 
       <ul class="list-bullet">
         <li><a href="https://packages.cloudfoundry.org/stable?release=macosx64&amp;source=github">Mac OS X 64 bit</a></li>
