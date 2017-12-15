@@ -24,3 +24,5 @@ node_modules
 
 # PaaS authentication file
 Staticfile.auth
+
+modified_manifest.yml
