@@ -2,7 +2,7 @@
 applications:
   - name: paas-product-page
     buildpack: ruby_buildpack
-    memory: 128M
+    memory: 256M
     instances: 2
     env:
       APP_ENV: production
