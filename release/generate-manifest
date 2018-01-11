@@ -3,12 +3,13 @@
 require 'yaml'
 
 cf_system_dns_root = ENV['CF_API'].sub('https://api.', '')
+cf_apps_domain = ENV['CF_APPS_DOMAIN']
 
 manifest = YAML.load($stdin.read)
 manifest['applications'].each { |app|
   app['env']['DESKPRO_API_KEY'] = ENV['DESKPRO_API_KEY']
   app['routes'] ||= []
   app['routes'] << { 'route' => 'www.' + cf_system_dns_root }
-  app['routes'] << { 'route' => 'paas-product-page.cloudapps.digital' }
+  app['routes'] << { 'route' => 'paas-product-page.' + cf_apps_domain }
 }
 puts manifest.to_yaml

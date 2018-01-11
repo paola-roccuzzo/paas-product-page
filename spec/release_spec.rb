@@ -11,6 +11,7 @@ describe "generating a manifest" do
       {
         'DESKPRO_API_KEY' => 'my-great-deskpro-api-key',
         'CF_API' => 'https://api.foo.bar.baz',
+        'CF_APPS_DOMAIN' => 'apps.foo.bar.baz'
       },
       cmd.to_s,
       stdin_data: manifest_template
@@ -27,7 +28,7 @@ describe "generating a manifest" do
 
   it "adds the cloudapps.digital route" do
     expect(new_manifest['applications'][0]['routes']).
-      to include({ 'route' => 'paas-product-page.cloudapps.digital' })
+      to include({ 'route' => 'paas-product-page.apps.foo.bar.baz' })
   end
 
   it "sets the DeskPro API key" do

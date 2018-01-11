@@ -5,6 +5,7 @@ set -eu
 echo "Creating manifest"
 export DESKPRO_API_KEY=`cat "../secrets/$SECRETS_FILE" | awk '/deskpro_api_key/ { print $2 }'`
 export CF_API
+export CF_APPS_DOMAIN
 release/generate-manifest \
     < manifest.yml \
     > modified_manifest.yml
