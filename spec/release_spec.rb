@@ -25,11 +25,6 @@ describe "generating a manifest" do
       to include({ 'route' => 'www.foo.bar.baz' })
   end
 
-  it "adds the cloudapps.digital route" do
-    expect(new_manifest['applications'][0]['routes']).
-      to include({ 'route' => 'paas-product-page.cloudapps.digital' })
-  end
-
   it "sets the DeskPro API key" do
     expect(new_manifest['applications'][0]['env']['DESKPRO_API_KEY']).
       to eq('my-great-deskpro-api-key')
@@ -39,4 +34,34 @@ describe "generating a manifest" do
     expect(new_manifest['applications'][0]['env']['DESKPRO_TEAM_ID']).
       to eq('1')
   end
+
+  let(:redirect_manifest_template) { dir.join('redirect/manifest.yml').read }
+
+  let(:new_redirect_manifest) {
+    cmd = dir.join('release', 'generate-redirect-manifest')
+
+    stdout, stderr, status = Open3.capture3(
+      {
+        'CF_API' => 'https://api.foo.bar.baz',
+        'CF_APPS_DOMAIN' => 'apps.foo.bar.baz',
+        'CF_APP_NAME' => 'paas-product-page',
+      },
+      cmd.to_s,
+      stdin_data: redirect_manifest_template
+    )
+
+    expect(stderr).to be_empty
+    YAML.load(stdout)
+  }
+
+  it "adds the cloudapps.digital route" do
+    expect(new_redirect_manifest['applications'][0]['routes']).
+      to include({ 'route' => 'paas-product-page.apps.foo.bar.baz' })
+  end
+
+  it "sets the REDIRECT_DOMAIN environment variable" do
+    expect(new_redirect_manifest['applications'][0]['env']).
+      to include({ 'REDIRECT_DOMAIN' => 'www.foo.bar.baz' })
+  end
+
 end

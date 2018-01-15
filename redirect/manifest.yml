@@ -1,0 +1,6 @@
+---
+applications:
+  - name: paas-product-page-redirect
+    buildpack: staticfile_buildpack
+    memory: 32M
+    instances: 2
