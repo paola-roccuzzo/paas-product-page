@@ -17,6 +17,14 @@
         </div>
     <% end %>
 
+    <% if params.key?('account-updated') %>
+        <div class="column-full">
+          <div class="govuk-box-highlight-green account-updated">
+            <p>Your account has been updated</p>
+          </div>
+        </div>
+    <% end %>
+
     <div class="column-two-thirds">
       <h1 class="heading-large">
         Access GOV.UK PaaS
