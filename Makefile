@@ -6,7 +6,7 @@ help: ## Show this help.
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 vendor: # reinstall ruby dependencies
-	@which -s bundle || (echo 'bundler is required to install application dependencies. Install Ruby + bundler' && false)
+	@which bundle > /dev/null 2>&1 || (echo 'bundler is required to install application dependencies. Install Ruby + bundler' && false)
 	bundle install --path vendor/bundle
 
 .PHONY: test
