@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :breadcrumb do %>
-	<%== erb :'partials/_breadcrumb', :locals => {name: 'Features, roadmap and pricing', href: request.path_info, active: true} %>
+	<%== erb :'partials/_breadcrumb', :locals => {name: 'Features, roadmap and security', href: request.path_info, active: true} %>
 <% end %>
 
 <div class="container">
@@ -29,6 +29,9 @@
 				<li>It allows SSH access to containers</li>
 				<li>Applications running on the platform are isolated from each other so they can’t read or change each other's code, data or logs</li>
 			</ul>
+			<p class="content-section__body">
+				<a href="/security">Read more about how we keep GOV.UK PaaS secure</a>
+			</p>
 			<h2 class="heading-medium">Languages supported</h2>
 			<ul class="list list-bullet">
 				<li>Go</li>
