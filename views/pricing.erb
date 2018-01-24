@@ -3,25 +3,13 @@
 <% end %>
 
 <% content_for :breadcrumb do %>
-	<%== erb :'partials/_breadcrumb', :locals => {name: 'Features, roadmap and pricing', href: request.path_info, active: true} %>
+	<%== erb :'partials/_breadcrumb', :locals => {name: 'Features, roadmap and security', href: request.path_info, active: true} %>
 <% end %>
 
 <div class="container">
 	<div class="grid-row">
 		<div class="column-one-third">
-			<nav class="sub-navigation">
-				<ol itemscope itemtype="http://schema.org/ItemList">
-					<li class="sub-navigation__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-						<a href="/features" itemprop="item"><span itemprop="name">Features</span></a>
-					</li>
-					<li class="sub-navigation__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-						<a href="/roadmap" itemprop="item"><span itemprop="name">Roadmap</span></a>
-					</li>
-					<li class="sub-navigation__item sub-navigation__item--active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-						<a href="/pricing" itemprop="item"><span itemprop="name">Pricing</span></a>
-					</li>
-				</ol>
-			</nav>
+			<%== erb :'partials/_subnav', :locals => {active: 'pricing'} %>
 		</div>
 
 

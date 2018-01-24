@@ -1,0 +1,32 @@
+<% content_for :head do %>
+	<title>Features - <%= settings.title %></title>
+<% end %>
+
+<% content_for :breadcrumb do %>
+	<%== erb :'partials/_breadcrumb', :locals => {name: 'Features, roadmap and security', href: request.path_info, active: true} %>
+<% end %>
+
+<div class="container">
+	<div class="grid-row">
+
+		<div class="column-one-third">
+			<%== erb :'partials/_subnav', :locals => {active: 'ia'} %>
+		</div>
+
+
+		<div class="column-two-thirds">
+			<h1 class="heading-xlarge">Information assurance</h1>
+
+			<h2 class="heading-medium">Platform assurance</h2>
+			<p>The platform has been assured by the Cabinet Office Senior Information Risk Owner (SIRO) and our information and security risk is deemed to be appropriate for data classified as ‘official’. In order to operate with live services, we underwent a formal risk assessment using a methodology based on ISO27005:2011. Our service is currently subject to the Cabinet Office and the Government Digital Service security governance.</p>
+			<p>Contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> if you need details on our Information Risk Management, or <a href="/security">read more about our platform security measures</a>.</p>
+
+			<h2 class="heading-medium">Your service assurance</h2>
+			<p>You’ll be responsible for the assurance of your own service, and making sure that you have in place appropriate controls for the information you handle.</p>
+			<p>When you assure your service through your own organisation’s information assurance (security) process, you don’t need to include assurance of GOV.UK PaaS, since we’ve already done that - we can share the work we’ve done with you.</p>
+			<p>GOV.UK PaaS runs from Amazon Web Services in Ireland. Our offshore request for ‘official’ data was successful, but your department’s information assurance team will need to make another offshoring request, so that the Office of the Government’s Senior Information Risk Owner (OGSIRO) is aware of any increase to our aggregate risk.</p>
+			<p>Contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> if you need more details about information assurance.</p>
+
+		</div>
+	</div>
+</div>

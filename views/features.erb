@@ -3,26 +3,14 @@
 <% end %>
 
 <% content_for :breadcrumb do %>
-	<%== erb :'partials/_breadcrumb', :locals => {name: 'Features, roadmap and pricing', href: request.path_info, active: true} %>
+	<%== erb :'partials/_breadcrumb', :locals => {name: 'Features, roadmap and security', href: request.path_info, active: true} %>
 <% end %>
 
 <div class="container">
 	<div class="grid-row">
 
 		<div class="column-one-third">
-			<nav class="sub-navigation">
-				<ol itemscope itemtype="http://schema.org/ItemList">
-					<li class="sub-navigation__item sub-navigation__item--active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-						<a href="/features" itemprop="item"><span itemprop="name">Features</span></a>
-					</li>
-					<li class="sub-navigation__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-						<a href="/roadmap" itemprop="item"><span itemprop="name">Roadmap</span></a>
-					</li>
-					<li class="sub-navigation__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-						<a href="/pricing" itemprop="item"><span itemprop="name">Pricing</span></a>
-					</li>
-				</ol>
-			</nav>
+			<%== erb :'partials/_subnav', :locals => {active: 'features'} %>
 		</div>
 
 
@@ -41,6 +29,9 @@
 				<li>It allows SSH access to containers</li>
 				<li>Applications running on the platform are isolated from each other so they can’t read or change each other's code, data or logs</li>
 			</ul>
+			<p class="content-section__body">
+				<a href="/security">Read more about how we keep GOV.UK PaaS secure</a>
+			</p>
 			<h2 class="heading-medium">Languages supported</h2>
 			<ul class="list list-bullet">
 				<li>Go</li>
