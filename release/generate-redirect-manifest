@@ -10,6 +10,7 @@ manifest = YAML.load($stdin.read)
 manifest['applications'].each { |app|
   app['routes'] ||= []
   app['routes'] << { 'route' => cf_app_name + '.' + cf_apps_domain }
+  app['routes'] << { 'route' => cf_system_dns_root }
 
   app['env'] ||= {}
   app['env']['REDIRECT_DOMAIN'] = 'www.' + cf_system_dns_root
