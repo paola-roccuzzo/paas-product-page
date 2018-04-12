@@ -53,6 +53,18 @@ module Forms
 			ticket
 		end
 
+		def to_zendesk_ticket()
+			ticket = {}
+			ticket[:subject] = subject
+			ticket[:comment] = { body: message }
+			ticket[:requester] = {
+				email: person_email,
+				name: person_name,
+			}
+			ticket[:tags] = [ 'govuk_paas_support', 'govuk_paas_product_page' ]
+			ticket[:group_id] = ENV['ZENDESK_GROUP_ID'].to_i if ENV['ZENDESK_GROUP_ID']
+			ticket
+		end
 	end
 
 	class Contact < Model
@@ -88,6 +100,18 @@ module Forms
 			ticket
 		end
 
+		def to_zendesk_ticket()
+			ticket = {}
+			ticket[:subject] = subject
+			ticket[:comment] = { body: rendered_message }
+			ticket[:requester] = {
+				email: person_email,
+				name: person_name,
+			}
+			ticket[:tags] = [ 'govuk_paas_support', 'govuk_paas_product_page' ]
+			ticket[:group_id] = ENV['ZENDESK_GROUP_ID'].to_i if ENV['ZENDESK_GROUP_ID']
+			ticket
+		end
 	end
 
 	module Helpers

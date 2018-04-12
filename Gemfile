@@ -20,3 +20,6 @@ gem "rake", "~> 12.1"
 
 # Added at 2017-10-27 14:53:36 +0100 by chrisfarmiloe:
 gem "erubis", "~> 2.7"
+
+# Added at 2018-04-12 13:58:55 +0100 by keymon:
+gem "zendesk_api", "~> 1.16"

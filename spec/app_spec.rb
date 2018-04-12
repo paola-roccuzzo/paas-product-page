@@ -1,5 +1,3 @@
-ENV['RACK_ENV'] = 'test'
-
 require 'rack/test'
 
 RSpec.describe "Content", :type => :feature do
