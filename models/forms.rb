@@ -1,10 +1,12 @@
 require './models/model'
+require './models/deskpro'
 
 module Forms
+	VALID_EMAIL_REGEX = /.+@.+\..+/
 
 	class Invite < Model
 		field :person_name,                  String, :label => 'Name'
-		field :person_email,                 String, :match => /.+@.+\..+/, :label => 'Email address'
+		field :person_email,                 String, :match => VALID_EMAIL_REGEX, :label => 'Email address'
 		field :person_is_manager,            Boolean
 	end
 
@@ -39,7 +41,7 @@ module Forms
 			msg
 		end
 
-		def to_ticket
+		def to_deskpro_ticket
 			ticket = Deskpro::Ticket.new({
 				subject: subject,
 				message: message,
@@ -50,6 +52,42 @@ module Forms
 			ticket.agent_team_id = ENV['DESKPRO_TEAM_ID'].to_i if ENV['DESKPRO_TEAM_ID']
 			ticket
 		end
+
+	end
+
+	class Contact < Model
+		MAX_FIELD_LEN = 2048
+
+		field :person_email,                 String, :required => true, :match => VALID_EMAIL_REGEX, :min => 5, :max => MAX_FIELD_LEN, :label => 'Email address'
+		field :person_name,                  String, :required => true, :min => 2, :max => MAX_FIELD_LEN, :label => 'Name'
+		field :message,                      String, :required => true, :max => MAX_FIELD_LEN, :min => 1
+		field :department_name,              String, :required => true
+		field :service_name,                 String, :required => true
+
+		def subject
+			"#{Date.today.to_s} support request from website"
+		end
+
+		def rendered_message
+			[
+				"department: #{department_name}",
+				"service: #{service_name}",
+				message || '',
+			].join("\n")
+		end
+
+		def to_deskpro_ticket
+			ticket = Deskpro::Ticket.new({
+				subject: subject,
+				message: rendered_message,
+				person_email: person_email,
+				person_name: person_name,
+				label: ['paas'],
+			})
+			ticket.agent_team_id = ENV['DESKPRO_TEAM_ID'].to_i if ENV['DESKPRO_TEAM_ID']
+			ticket
+		end
+
 	end
 
 	module Helpers

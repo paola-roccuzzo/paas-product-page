@@ -61,31 +61,26 @@ class App < Sinatra::Base
 
 	get '/contact-us' do
 		@errors = {}
-		@ticket = Deskpro::Ticket.new
+		@form = Forms::Contact.new
 		erb :'contact-us'
 	end
 
 	post '/contact-us' do
 		@errors = {}
-		@ticket = Deskpro::Ticket.new({
-			subject: "#{Date.today.to_s} Support Request From Website",
-			person_email: params[:person_email],
-			person_name: params[:person_name],
-			message: [
-				"department: #{params[:department_name]}",
-				"service: #{params[:service_name]}",
-				params[:message] || '',
-			].join("\n"),
-			label: ['paas'],
+		@form = Forms::Contact.new({
+			:person_email => params[:person_email],
+			:person_name => params[:person_name],
+			:message => params[:message],
+			:department_name => params[:department_name],
+			:service_name => params[:service_name],
 		})
-		@ticket.agent_team_id = ENV['DESKPRO_TEAM_ID'].to_i if ENV['DESKPRO_TEAM_ID']
-		if not @ticket.valid?
-			@errors = @ticket.errors
+		if not @form.valid?
+			@errors = @form.errors
 			status 400
 			erb :'contact-us'
 		else
 			begin
-				deskpro.post @ticket
+				deskpro.post @form.to_deskpro_ticket
 				@msg = "We’ll contact you in the next working day"
 				erb :thanks
 			rescue => ex
@@ -130,7 +125,7 @@ class App < Sinatra::Base
 			return erb :signup
 		else
 			begin
-				deskpro.post @form.to_ticket
+				deskpro.post @form.to_deskpro_ticket
 				@msg = "We’ll email you with your organisation account details in the next working day."
 				erb :thanks
 			rescue => ex
