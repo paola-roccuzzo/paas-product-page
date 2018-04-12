@@ -1,14 +1,9 @@
-ENV['RACK_ENV'] = 'test'
-ENV['DESKPRO_API_KEY'] = FAKE_DESKPRO_API_KEY
-ENV['DESKPRO_ENDPOINT'] = FAKE_DESKPRO_ENDPOINT
-ENV['DESKPRO_TEAM_ID'] = '1'
-
 require 'rack/test'
 require 'capybara/rspec'
 require 'net/http'
 Capybara.app = Rack::Builder.parse_file("config.ru").first
 
-RSpec.describe "ContactUs", :type => :feature do
+RSpec.shared_examples "ContactUs" do
 
 	include Rack::Test::Methods
 
@@ -76,4 +71,18 @@ RSpec.describe "ContactUs", :type => :feature do
 		expect(page.response_headers['Content-Security-Policy']).to eq("connect-src 'self' www.google-analytics.com; default-src none; font-src 'self' data:; frame-src 'self'; img-src 'self' www.google-analytics.com; media-src 'self'; object-src 'self'; script-src 'self' www.google-analytics.com; style-src 'self' 'unsafe-inline'")
 	end
 
+end
+
+RSpec.describe "ContactUs Deskpro", :type => :feature do
+	before(:each) do
+		ENV['USE_ZENDESK'] = "false"
+	end
+	include_examples "ContactUs"
+end
+
+RSpec.describe "ContactUs Zendesk", :type => :feature do
+	before(:each) do
+		ENV['USE_ZENDESK'] = "true"
+	end
+	include_examples "ContactUs"
 end
