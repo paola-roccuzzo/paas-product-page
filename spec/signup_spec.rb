@@ -1,7 +1,9 @@
 ENV['RACK_ENV'] = 'test'
-ENV['DESKPRO_API_KEY'] = FAKE_DESKPRO_API_KEY
-ENV['DESKPRO_ENDPOINT'] = FAKE_DESKPRO_ENDPOINT
-ENV['DESKPRO_TEAM_ID'] = '1'
+
+ENV['ZENDESK_URL'] = 'https://' + FAKE_ZENDESK_ENDPOINT + '/api/v2'
+ENV['ZENDESK_USER'] = FAKE_ZENDESK_USER
+ENV['ZENDESK_TOKEN'] = FAKE_ZENDESK_TOKEN
+ENV['ZENDESK_GROUP_ID'] = '1'
 
 ENV['ZENDESK_URL'] = 'https://' + FAKE_ZENDESK_ENDPOINT + '/api/v2'
 ENV['ZENDESK_USER'] = FAKE_ZENDESK_USER
@@ -13,7 +15,7 @@ require 'capybara/rspec'
 require 'net/http'
 Capybara.app = Rack::Builder.parse_file("config.ru").first
 
-RSpec.shared_examples "Signup" do
+RSpec.describe "Signup", :type => :feature do
 
 	include Rack::Test::Methods
 
@@ -125,18 +127,4 @@ RSpec.shared_examples "Signup" do
 		expect(page.status_code).to eq(200)
 	end
 
-end
-
-RSpec.describe "Signup Deskpro", :type => :feature do
-	before(:each) do
-		ENV['USE_ZENDESK'] = "false"
-	end
-	include_examples "Signup"
-end
-
-RSpec.describe "Signup Zendesk", :type => :feature do
-	before(:each) do
-		ENV['USE_ZENDESK'] = "true"
-	end
-	include_examples "Signup"
 end

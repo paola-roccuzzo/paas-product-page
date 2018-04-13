@@ -1,5 +1,4 @@
 require './models/model'
-require './models/deskpro'
 
 module Forms
 	VALID_EMAIL_REGEX = /.+@.+\..+/
@@ -41,18 +40,6 @@ module Forms
 			msg
 		end
 
-		def to_deskpro_ticket
-			ticket = Deskpro::Ticket.new({
-				subject: subject,
-				message: message,
-				person_email: person_email,
-				person_name: person_name,
-				label: ['paas'],
-			})
-			ticket.agent_team_id = ENV['DESKPRO_TEAM_ID'].to_i if ENV['DESKPRO_TEAM_ID']
-			ticket
-		end
-
 		def to_zendesk_ticket()
 			ticket = {}
 			ticket[:subject] = subject
@@ -86,18 +73,6 @@ module Forms
 				"service: #{service_name}",
 				message || '',
 			].join("\n")
-		end
-
-		def to_deskpro_ticket
-			ticket = Deskpro::Ticket.new({
-				subject: subject,
-				message: rendered_message,
-				person_email: person_email,
-				person_name: person_name,
-				label: ['paas'],
-			})
-			ticket.agent_team_id = ENV['DESKPRO_TEAM_ID'].to_i if ENV['DESKPRO_TEAM_ID']
-			ticket
 		end
 
 		def to_zendesk_ticket()

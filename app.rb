@@ -7,7 +7,6 @@ require 'sinatra/sprockets-helpers'
 require 'erubis'
 require 'zendesk_api'
 
-require './models/deskpro'
 require './models/forms'
 
 # App is the main Sinatra application
@@ -82,11 +81,7 @@ class App < Sinatra::Base
 			erb :'contact-us'
 		else
 			begin
-				if ENV['USE_ZENDESK'] == "true"
-					zendesk.tickets.create! @form.to_zendesk_ticket
-				else
-					deskpro.post @form.to_deskpro_ticket
-				end
+				zendesk.tickets.create! @form.to_zendesk_ticket
 				@msg = "We’ll contact you in the next working day"
 				erb :thanks
 			rescue => ex
@@ -131,11 +126,7 @@ class App < Sinatra::Base
 			return erb :signup
 		else
 			begin
-				if ENV['USE_ZENDESK'] == "true"
-					zendesk.tickets.create! @form.to_zendesk_ticket
-				else
-					deskpro.post @form.to_deskpro_ticket
-				end
+				zendesk.tickets.create! @form.to_zendesk_ticket
 				@msg = "We’ll email you with your organisation account details in the next working day."
 				erb :thanks
 			rescue => ex
@@ -190,14 +181,6 @@ class App < Sinatra::Base
 	end
 
 	helpers do
-
-		# create a deskpro client
-		def deskpro
-			Deskpro::Client.new(
-				api_key: ENV['DESKPRO_API_KEY'],
-				endpoint: ENV['DESKPRO_ENDPOINT']
-			)
-		end
 
 		# create a zendesk client
 		def zendesk
