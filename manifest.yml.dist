@@ -6,6 +6,7 @@ applications:
     instances: 2
     env:
       APP_ENV: production
-      DESKPRO_API_KEY:
-      DESKPRO_TEAM_ID: '1'
-      DESKPRO_ENDPOINT: 'https://gaap.deskpro.com'
+      ZENDESK_URL: https://govuk.zendesk.com/api/v2
+      ZENDESK_USER: ...
+      ZENDESK_TOKEN:
+      ZENDESK_GROUP_ID: 360000031809

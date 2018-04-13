@@ -3,7 +3,7 @@ require 'capybara/rspec'
 require 'net/http'
 Capybara.app = Rack::Builder.parse_file("config.ru").first
 
-RSpec.shared_examples "Signup" do
+RSpec.describe "Signup", :type => :feature do
 
 	include Rack::Test::Methods
 
@@ -115,18 +115,4 @@ RSpec.shared_examples "Signup" do
 		expect(page.status_code).to eq(200)
 	end
 
-end
-
-RSpec.describe "Signup Deskpro", :type => :feature do
-	before(:each) do
-		ENV['USE_ZENDESK'] = "false"
-	end
-	include_examples "Signup"
-end
-
-RSpec.describe "Signup Zendesk", :type => :feature do
-	before(:each) do
-		ENV['USE_ZENDESK'] = "true"
-	end
-	include_examples "Signup"
 end

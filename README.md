@@ -10,9 +10,6 @@ The following environment variables should be set for correct deployment:
 
 | variable | required | description |
 |---|---|---|
-| `DESKPRO_API_KEY` | yes | agent api key |
-| `DESKPRO_ENDPOINT` | yes | endpoint url (ie "https://accountname.deskpro.com") |
-| `DESKPRO_TEAM_ID` | no | id of team to assign tickets to |
 | `ZENDESK_URL` | yes | endpoint url (ie "https://accountname.zendesk.com/api/v2") |
 | `ZENDESK_USER` | yes | user for the api |
 | `ZENDESK_TOKEN` | yes | token for the api |
@@ -34,17 +31,10 @@ You will find:
 To start the server locally in development mode:
 
 ```
-DESKPRO_TEAM_ID=1 DESKPRO_API_KEY='REDACTED' DESKPRO_ENDPOINT='https://account.deskpro.com' make dev
-```
-
-or
-
-```
 ZENDESK_USER='REDACTED' \
 ZENDESK_TOKEN='REDACTED' \
 ZENDESK_URL=https://account.zendesk.com/api/v2 \
 ZENDESK_GROUP_ID=123456789 \
-USE_ZENDESK=true \
 make dev
 ```
 
