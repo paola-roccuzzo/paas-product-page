@@ -10,9 +10,10 @@ The following environment variables should be set for correct deployment:
 
 | variable | required | description |
 |---|---|---|
-| `DESKPRO_API_KEY` | yes | agent api key |
-| `DESKPRO_ENDPOINT` | yes | endpoint url (ie "https://accountname.deskpro.com") |
-| `DESKPRO_TEAM_ID` | no | id of team to assign tickets to |
+| `ZENDESK_URL` | yes | endpoint url (ie "https://accountname.zendesk.com/api/v2") |
+| `ZENDESK_USER` | yes | user for the api |
+| `ZENDESK_TOKEN` | yes | token for the api |
+| `ZENDESK_GROUP_ID` | no | group id to send the tickets to |
 
 ## Development
 
@@ -30,7 +31,11 @@ You will find:
 To start the server locally in development mode:
 
 ```
-DESKPRO_TEAM_ID=1 DESKPRO_API_KEY='REDACTED' DESKPRO_ENDPOINT='https://account.deskpro.com' make dev
+ZENDESK_USER='REDACTED' \
+ZENDESK_TOKEN='REDACTED' \
+ZENDESK_URL=https://account.zendesk.com/api/v2 \
+ZENDESK_GROUP_ID=123456789 \
+make dev
 ```
 
 ## Deploying changes
@@ -49,6 +54,6 @@ Check in your changes to master.
 $ ./release/push
 ```
 
-Note: you will need the correct PaaS permissions as well as target your 
+Note: you will need the correct PaaS permissions as well as target your
 desired organisation and space.
 

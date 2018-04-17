@@ -1,8 +1,3 @@
-ENV['RACK_ENV'] = 'test'
-ENV['DESKPRO_API_KEY'] = FAKE_DESKPRO_API_KEY
-ENV['DESKPRO_ENDPOINT'] = FAKE_DESKPRO_ENDPOINT
-ENV['DESKPRO_TEAM_ID'] = '1'
-
 require 'rack/test'
 require 'capybara/rspec'
 require 'net/http'

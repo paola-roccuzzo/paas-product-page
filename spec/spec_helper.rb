@@ -1,15 +1,21 @@
 require 'webmock/rspec'
-require 'support/fake_deskpro'
+require 'support/fake_zendesk'
 
 WebMock.allow_net_connect!
-FAKE_DESKPRO_ENDPOINT = 'api.mockendpoint.com'
-FAKE_DESKPRO_API_KEY = '1:XXXXYYYYZZZZ'
+
+FAKE_ZENDESK_ENDPOINT = 'api.zendesk-mockendpoint.com'
+FAKE_ZENDESK_USER = 'user@example.com'
+FAKE_ZENDESK_TOKEN = '1:XXXXYYYYZZZZ'
+
+ENV['ZENDESK_URL'] = 'https://' + FAKE_ZENDESK_ENDPOINT + '/api/v2'
+ENV['ZENDESK_USER'] = FAKE_ZENDESK_USER
+ENV['ZENDESK_TOKEN'] = FAKE_ZENDESK_TOKEN
+ENV['ZENDESK_GROUP_ID'] = '1'
 
 RSpec.configure do |config|
 
 	config.before(:each) do
-		stub_request(:any, /#{FAKE_DESKPRO_ENDPOINT}/).to_rack(FakeDeskpro)
-		stub_request(:any, /#{FAKE_DESKPRO_ENDPOINT}/).to_rack(FakeDeskpro)
+		stub_request(:any, /#{FAKE_ZENDESK_ENDPOINT}/).to_rack(FakeZenDesk)
 	end
 
 	config.expect_with :rspec do |expectations|
