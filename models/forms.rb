@@ -19,7 +19,7 @@ module Forms
 		field :invites,                      Array, :of => Invite
 
 		def subject
-			"#{Date.today.to_s} Registration Request"
+			"[PaaS Support] #{Date.today.to_s} Registration Request"
 		end
 
 		def message
@@ -29,7 +29,7 @@ module Forms
 				"From: #{person_name}",
 				"Email: #{person_email} #{"(org manager)" if person_is_manager}",
 				"Department: #{department_name}",
-				"Team: #{service_name}",
+				"Team/Service: #{service_name}",
 			].join("\n")
 			if invite_users
 				msg << ([
@@ -64,13 +64,16 @@ module Forms
 		field :service_name,                 String, :required => true
 
 		def subject
-			"#{Date.today.to_s} support request from website"
+			"[PaaS Support] #{Date.today.to_s} support request from website"
 		end
 
 		def rendered_message
 			[
-				"department: #{department_name}",
-				"service: #{service_name}",
+				"From: #{person_name}",
+				"Email: #{person_email}",
+				"Department: #{department_name}",
+				"Team/Service: #{service_name}",
+				"",
 				message || '',
 			].join("\n")
 		end
